@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="woldtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblSuggestedSong">
+          <Key>
+            <PropertyRef Name="SuggestedSongId" />
+          </Key>
+          <Property Name="SuggestedSongId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SuggestedSongTitle" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SuggestedSongArtist" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SuggestedSongAlbumTitle" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="SuggestedSongImagePath" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUserSuggestedSong">
+          <Key>
+            <PropertyRef Name="UserSuggestedSongId" />
+          </Key>
+          <Property Name="UserSuggestedSongId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SuggestedSongId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Function Name="spSuggestedSongTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="woldtModelStoreContainer">
+          <EntitySet Name="tblSuggestedSong" EntityType="Self.tblSuggestedSong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserSuggestedSong" EntityType="Self.tblUserSuggestedSong" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="woldtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblSuggestedSong">
+          <Key>
+            <PropertyRef Name="SuggestedSongId" />
+          </Key>
+          <Property Name="SuggestedSongId" Type="Guid" Nullable="false" />
+          <Property Name="SuggestedSongTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SuggestedSongArtist" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SuggestedSongAlbumTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SuggestedSongImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUserSuggestedSong">
+          <Key>
+            <PropertyRef Name="UserSuggestedSongId" />
+          </Key>
+          <Property Name="UserSuggestedSongId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="SuggestedSongId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="playlistEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblSuggestedSongs" EntityType="Self.tblSuggestedSong" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblUserSuggestedSongs" EntityType="Self.tblUserSuggestedSong" />
+          <FunctionImport Name="spSuggestedSongTitle" ReturnType="Collection(String)" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="woldtModelStoreContainer" CdmEntityContainer="playlistEntities">
+          <EntitySetMapping Name="tblSuggestedSongs">
+            <EntityTypeMapping TypeName="woldtModel.tblSuggestedSong">
+              <MappingFragment StoreEntitySet="tblSuggestedSong">
+                <ScalarProperty Name="SuggestedSongId" ColumnName="SuggestedSongId" />
+                <ScalarProperty Name="SuggestedSongTitle" ColumnName="SuggestedSongTitle" />
+                <ScalarProperty Name="SuggestedSongArtist" ColumnName="SuggestedSongArtist" />
+                <ScalarProperty Name="SuggestedSongAlbumTitle" ColumnName="SuggestedSongAlbumTitle" />
+                <ScalarProperty Name="SuggestedSongImagePath" ColumnName="SuggestedSongImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="woldtModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserSuggestedSongs">
+            <EntityTypeMapping TypeName="woldtModel.tblUserSuggestedSong">
+              <MappingFragment StoreEntitySet="tblUserSuggestedSong">
+                <ScalarProperty Name="UserSuggestedSongId" ColumnName="UserSuggestedSongId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SuggestedSongId" ColumnName="SuggestedSongId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spSuggestedSongTitle" FunctionName="woldtModel.Store.spSuggestedSongTitle" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
