@@ -78,11 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <EntityDeploy Include="PlayList.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PlayList.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="PlayList.edmx.diagram">
       <DependentUpon>PlayList.edmx</DependentUpon>
     </None>
