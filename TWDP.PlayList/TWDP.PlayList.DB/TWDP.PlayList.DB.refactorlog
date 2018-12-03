@@ -28,4 +28,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UserSuggestedSongId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ca9acd5a-8fc6-47e0-aa0c-203f0abd2fdf" ChangeDateTime="12/02/2018 23:33:41">
+    <Property Name="ElementName" Value="[dbo].[tblUser].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6edff1be-66c0-4ff6-bfc1-1561f6150c17" ChangeDateTime="12/02/2018 23:35:04">
+    <Property Name="ElementName" Value="[dbo].[tblUser].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblUser]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
 </Operations>

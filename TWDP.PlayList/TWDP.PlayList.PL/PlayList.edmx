@@ -22,6 +22,9 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LoginId" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUserSuggestedSong">
           <Key>
@@ -58,6 +61,9 @@
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblUserSuggestedSong">
           <Key>
@@ -93,6 +99,9 @@
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="woldtModel.tblUser">
               <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
