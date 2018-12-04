@@ -146,8 +146,8 @@ namespace TWDP.Playlist.BL
             {
                 playlistEntities dc = new playlistEntities();
 
-                        var songs = from u in dc.tblUsers
-                            join uss in dc.tblUserSuggestedSongs on guid equals uss.UserId
+                        var songs = from uss in dc.tblUserSuggestedSongs
+                                    where uss.UserId == guid
                             join s in dc.tblSuggestedSongs on uss.SuggestedSongId equals s.SuggestedSongId
                             
                             select new
