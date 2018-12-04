@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0c11faf7238d4ac2bc38a921e2dd50ac" Name="Diagram1" ZoomLevel="67">
-        <EntityTypeShape EntityType="woldtModel.tblSuggestedSong" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="woldtModel.tblUser" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="woldtModel.tblUserSuggestedSong" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="woldtModel.tblSuggestedSong" Width="1.5" PointX="7.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="woldtModel.tblUser" Width="1.5" PointX="1.625" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="woldtModel.tblUserSuggestedSong" Width="1.5" PointX="4.875" PointY="1.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -9,85 +9,123 @@ namespace TWDP.Playlist.BL
 {
     public class Song
     {
+
+
+
         public Guid SongId { get; set; }
         public string SongTitle { get; set; }
         public string Artist { get; set; }
         public string AlbumTitle { get; set; }
         public string ImagePath { get; set; }
-        //public List<Songs> { get; set; } **note to tim and dalton will make on tuesday
+        public List<Song> songlist { get; set; }
 
 
-        public bool Insert()
+
+        private string suggestedSongAlbumTitle;
+        private string suggestedSongArtist;
+        private Guid suggestedSongId;
+        private string suggestedSongImagePath;
+        private string suggestedSongTitle;
+
+
+        public Song()
         {
-            int result = 0;
+
+            songlist = new List<Song>();
+
+
+        }
+
+
+
+
+
+        public Song(string suggestedSongAlbumTitle, string suggestedSongArtist, Guid suggestedSongId, string suggestedSongImagePath, string suggestedSongTitle)
+        {
+            this.suggestedSongAlbumTitle = suggestedSongAlbumTitle;
+            this.suggestedSongArtist = suggestedSongArtist;
+            this.suggestedSongId = suggestedSongId;
+            this.suggestedSongImagePath = suggestedSongImagePath;
+            this.suggestedSongTitle = suggestedSongTitle;
+        }
+
+
+
+
+
+        public void Insert()
+        {
+            
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
                     tblSuggestedSong suggestedSong = new tblSuggestedSong();
                     suggestedSong.SuggestedSongId = Guid.NewGuid();
-                    suggestedSong.SuggestedSongTitle = this.SongTitle;
-                    suggestedSong.SuggestedSongArtist = this.Artist;
-                    suggestedSong.SuggestedSongAlbumTitle = this.AlbumTitle;
-                    suggestedSong.SuggestedSongImagePath = this.ImagePath;
+                    suggestedSong.SuggestedSongTitle = SongTitle;
+                    suggestedSong.SuggestedSongArtist = Artist;
+                    suggestedSong.SuggestedSongAlbumTitle = AlbumTitle;
+                    suggestedSong.SuggestedSongImagePath = ImagePath;
 
                     dc.tblSuggestedSongs.Add(suggestedSong);
-                    result = dc.SaveChanges();
+                    dc.SaveChanges();
                 }
 
-                return result == 0 ? false : true;
+                
 
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return false;
-                throw ex;
+                
+                throw e;
             }
         }
 
-        //   HEY TIM, YOURE THE MAN. I ADDED THE DELETE BELOW JUST FOR SHITS AND GIGGLES. YOURE THE MAN :)
-        public int Delete()
+        
+        public void Delete()
         {
-            int results = 0;
+            
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-                    var song = dc.tblSuggestedSongs.Where(a => a.SuggestedSongTitle == this.SuggestedSongTitle).FirstOrDefault();
+                 
+                  tblSuggestedSong songtable = dc.tblSuggestedSongs.Where(s => s.SuggestedSongId == SongId).FirstOrDefault();
 
-
-                    tblSuggestedSong songtable = dc.tblSuggestedSongs.Where(m => m.SuggestedSongId == song.SuggestedSongTitle).FirstOrDefault();
-
-                    if (song != null)
+                    if (songtable!= null)
                     {
-                        dc.tblSuggestedSongs.Remove(song);
+                        dc.tblSuggestedSongs.Remove(songtable);
 
-                        results = dc.SaveChanges();
+                        dc.SaveChanges();
                     }
-                    return results;
+                    
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return results;
-                throw ex;
+                
+                throw e;
             }
 
 
         }
 
 
-        public void LoadById()
+        public void LoadById(Guid guid)
         {
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-                    tblSuggestedSong song = dc.tblSuggestedSongs.FirstOrDefault(m => m.QId == this.SongId);
+
+                    tblSuggestedSong song = dc.tblSuggestedSongs.FirstOrDefault(s => s.SuggestedSongId == guid);
                     if (song != null)
                     {
-                        this.SongId = song.SuggestedSongId;
-                        this.SongTitle = song.SuggestedSongTitle;
+                        SongId = song.SuggestedSongId;
+                        SongTitle = song.SuggestedSongTitle;
+                        Artist = song.SuggestedSongArtist;
+                        ImagePath = song.SuggestedSongImagePath;
+                        AlbumTitle = song.SuggestedSongAlbumTitle;
                     }
                     else
                     {
@@ -95,32 +133,55 @@ namespace TWDP.Playlist.BL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw ex;
+                throw e;
             }
         }
 
-
-        public class SongList : List<Song>
+        public void LoadPlaylist(Guid guid)
         {
-            public void Load()
-            {
-                try
-                {
-                    using (playlistEntities dc = new playlistEntities())
-                    {
-                        dc.tblSuggestedSongs.ToList().ForEach(a => Add(new Song(a.SongId, a.SuggestedSongTitle)));
-                    }
-                }
-                catch (Exception ex)
-                {
 
-                    throw ex;
+            try
+            {
+                playlistEntities dc = new playlistEntities();
+
+     
+
+                var songs = from u in tblUser
+                    from uss in dc.tblUserSuggestedSongs
+                            join s in dc.tblSuggestedSongs on uss.SuggestedSongId equals s.SuggestedSongId
+                            where uss.SuggestedSongId == SongId
+                            select new
+                            {
+                                s.SuggestedSongAlbumTitle,
+                                s.SuggestedSongArtist,
+                                s.SuggestedSongId,
+                                s.SuggestedSongImagePath,
+                                s.SuggestedSongTitle
+                            };
+
+                foreach (var s in songs)
+                {
+                     Song song = new Song(s.SuggestedSongAlbumTitle, s.SuggestedSongArtist, s.SuggestedSongId, s.SuggestedSongImagePath, s.SuggestedSongTitle);
+                    songlist.Add(song);
+
                 }
+
+
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
             }
 
 
         }
+      
     }
+
+
 }
