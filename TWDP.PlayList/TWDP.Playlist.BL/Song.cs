@@ -146,12 +146,10 @@ namespace TWDP.Playlist.BL
             {
                 playlistEntities dc = new playlistEntities();
 
-     
-
-                var songs = from u in tblUser
-                    from uss in dc.tblUserSuggestedSongs
+                        var songs = from u in dc.tblUsers
+                            join uss in dc.tblUserSuggestedSongs on guid equals uss.UserId
                             join s in dc.tblSuggestedSongs on uss.SuggestedSongId equals s.SuggestedSongId
-                            where uss.SuggestedSongId == SongId
+                            
                             select new
                             {
                                 s.SuggestedSongAlbumTitle,
