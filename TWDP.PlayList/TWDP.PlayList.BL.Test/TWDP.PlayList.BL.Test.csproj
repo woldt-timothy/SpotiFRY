@@ -54,6 +54,11 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="utUser.cs" />
@@ -64,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TWDP.Playlist.BL\TWDP.Playlist.BL.csproj">
+      <Project>{6ff96a65-f716-4d07-be8e-ba1a265d5cfb}</Project>
+      <Name>TWDP.Playlist.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TWDP.PlayList.PL\TWDP.PlayList.PL.csproj">
       <Project>{c12c15ce-74a7-4f41-856a-e2af188fc220}</Project>
       <Name>TWDP.PlayList.PL</Name>

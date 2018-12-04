@@ -18,7 +18,11 @@ namespace TWDP.Playlist.BL
 
 
 
-        //May or May not use in our appp //tim -- you need to hash password
+        public User()
+        {
+        }
+
+
         public void Insert()
         {
             try
@@ -31,7 +35,8 @@ namespace TWDP.Playlist.BL
                     user.FirstName = FirstName;
                     user.LastName = LastName;
                     user.LoginId = LoginId;
-                    user.Password = Password;
+                    user.Password = GetHash();
+                    
 
                     dc.tblUsers.Add(user);
                     dc.SaveChanges();
@@ -41,28 +46,83 @@ namespace TWDP.Playlist.BL
             catch (Exception e)
             {
 
-           
+
+                throw e;
+            }
+        }
+
+ 
+
+        private string GetHash()
+        {
+            using (var hash = new System.Security.Cryptography.SHA1Managed())
+            {
+                var hashbytes = System.Text.Encoding.UTF8.GetBytes(this.Password);
+                return Convert.ToBase64String(hash.ComputeHash(hashbytes));
+            }
+        }
+
+        public bool Login()
+        {
+            try
+            {
+                if (LoginId != null && LoginId != string.Empty)
+                {
+                    if (Password != null && Password != string.Empty)
+                    {
+                        playlistEntities dc = new playlistEntities();
+                        tblUser user = dc.tblUsers.FirstOrDefault(u => u.LoginId == this.LoginId);
+                        if (user != null)
+                        {
+                            if (user.Password == this.GetHash())
+                            {
+                                
+                                FirstName = user.FirstName;
+                                LastName = user.LastName;
+                                UserId = user.UserId;
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
 
                 throw e;
             }
         }
 
 
-        //Take a look at this again //May or May not use in our appp
         public void Delete()
         {
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-                    tblUser user = dc.tblUsers.Where(u => u.UserId == UserId).FirstOrDefault();
+                    tblUser user = dc.tblUsers.Where(u => u.LoginId == LoginId).FirstOrDefault();
 
                     if (user != null)
                     {
                         dc.tblUsers.Remove(user);
                         dc.SaveChanges();
                     }
-
 
                 }
 
@@ -79,22 +139,19 @@ namespace TWDP.Playlist.BL
 
 
         
-
-        //Take a look at this again //May or May not use in our appp
         public void Update()
         {
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-                    tblUser user = dc.tblUsers.FirstOrDefault(u => u.UserId == UserId);
+                    tblUser user = dc.tblUsers.FirstOrDefault(u => u.LoginId == LoginId);
                     if (user != null)
                     {
                         user.Email = Email;
-                        user.FirstName = FirstName;
                         user.LastName = LastName;
                         user.LoginId = LoginId;
-                        user.Password = Password;
+                        user.Password = GetHash();
                         dc.SaveChanges();
                     }
 
@@ -107,14 +164,14 @@ namespace TWDP.Playlist.BL
             }
         }
 
-        public void LoadById(Guid guid)
+        public void LoadById(string loginid)
         {
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
 
-                    var user = dc.tblUsers.FirstOrDefault(u => u.UserId == guid);
+                    var user = dc.tblUsers.FirstOrDefault(u => u.LoginId == loginid);
                     if (user != null)
                     {
                         UserId = user.UserId;
@@ -124,9 +181,6 @@ namespace TWDP.Playlist.BL
                         Password = user.Password;
                         LoginId = user.LoginId;
                     }
-
-
-
 
                     
                 }
@@ -138,10 +192,6 @@ namespace TWDP.Playlist.BL
                 throw e;
             }
         }
-
-
-
-
 
 
 
