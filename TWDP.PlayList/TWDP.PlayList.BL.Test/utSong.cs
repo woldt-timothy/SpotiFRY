@@ -8,7 +8,7 @@ using TWDP.PlayList.PL;
 namespace TWDP.PlayList.BL.Test
 {
     [TestClass]
-    public class utUser
+    public class utSong
     {
         [TestMethod]
         public void InsertTest()
@@ -32,70 +32,24 @@ namespace TWDP.PlayList.BL.Test
 
             Assert.AreEqual(expected, actual);
 
-
         }
 
 
         [TestMethod]
-        public void DeleteTest()
+        public void LoadByIdTest()
         {
 
-            User user = new User();
-
-      
-            user.LoginId = "smallDude";
-      
-            user.Delete();
 
 
-            playlistEntities dc = new playlistEntities();
+            Song song = new Song();
 
-            var users = dc.tblUsers;
-            int expected = 6;
-            int actual = users.Count();
+            song.LoadById("aaaa");
+
+            string expected = "aaaa";
+            string actual = song.ActivationCode;
 
             Assert.AreEqual(expected, actual);
-
-
         }
-
-
-        [TestMethod]
-        public void UpdateTest()
-        {
-
-            User user = new User();
-
-
-            user.LoginId = "BadBadBoba";
-            user.LastName = "Time Bomb";
-            user.Password = "YoYo";
-            user.Email = "yoyo@gmail.com";
-
-            user.Update();
-
-
-            User otherUser = new User();
-
-
-            otherUser.LoadById("BadBadBoba");
-
-
-
-
-           
-            string expected = "Time Bomb";
-
-            string actual = otherUser.LastName;
-
-            Assert.AreEqual(expected, actual);
-
-
-        }
-
-
-
-
 
 
     }

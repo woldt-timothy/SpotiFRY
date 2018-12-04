@@ -45,5 +45,82 @@ namespace TWDP.Playlist.BL
             }
         }
 
+        //   HEY TIM, YOURE THE MAN. I ADDED THE DELETE BELOW JUST FOR SHITS AND GIGGLES. YOURE THE MAN :)
+        public int Delete()
+        {
+            int results = 0;
+            try
+            {
+                using (playlistEntities dc = new playlistEntities())
+                {
+                    var song = dc.tblSuggestedSongs.Where(a => a.SuggestedSongTitle == this.SuggestedSongTitle).FirstOrDefault();
+
+
+                    tblSuggestedSong songtable = dc.tblSuggestedSongs.Where(m => m.SuggestedSongId == song.SuggestedSongTitle).FirstOrDefault();
+
+                    if (song != null)
+                    {
+                        dc.tblSuggestedSongs.Remove(song);
+
+                        results = dc.SaveChanges();
+                    }
+                    return results;
+                }
+            }
+            catch (Exception ex)
+            {
+                return results;
+                throw ex;
+            }
+
+
+        }
+
+
+        public void LoadById()
+        {
+            try
+            {
+                using (playlistEntities dc = new playlistEntities())
+                {
+                    tblSuggestedSong song = dc.tblSuggestedSongs.FirstOrDefault(m => m.QId == this.SongId);
+                    if (song != null)
+                    {
+                        this.SongId = song.SuggestedSongId;
+                        this.SongTitle = song.SuggestedSongTitle;
+                    }
+                    else
+                    {
+                        throw new Exception("Couldn't find the row.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public class SongList : List<Song>
+        {
+            public void Load()
+            {
+                try
+                {
+                    using (playlistEntities dc = new playlistEntities())
+                    {
+                        dc.tblSuggestedSongs.ToList().ForEach(a => Add(new Song(a.SongId, a.SuggestedSongTitle)));
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+
+
+        }
     }
 }
