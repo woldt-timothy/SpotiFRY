@@ -23,6 +23,8 @@ namespace TWDP.PlayList.UI
         public MainWindow()
         {
             InitializeComponent();
+
         }
+
     }
 }
