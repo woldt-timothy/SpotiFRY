@@ -11,9 +11,10 @@
         <SolidColorBrush Color="Black"/>
     </Window.OpacityMask>
     <Grid>
-        <Image x:Name="imgAlbumArtwork" HorizontalAlignment="Left" Height="593" VerticalAlignment="Top" Width="593" Margin="174,-74,-174,-100">
+        <Image x:Name="imgAlbumArtwork" HorizontalAlignment="Left" Height="593" VerticalAlignment="Top" Width="593" Margin="2,-89,0,-83">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="https://cdn.pixabay.com/photo/2016/03/23/17/26/music-note-1275177_960_720.png" Stretch="Uniform"/>
+                
             </Image.OpacityMask>
         </Image>
         <Label x:Name="lblRecent" Content="Recently Played" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,39,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="20"/>
