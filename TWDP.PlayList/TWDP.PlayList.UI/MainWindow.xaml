@@ -14,12 +14,15 @@
         <Image x:Name="imgAlbumArtwork" HorizontalAlignment="Left" Height="593" VerticalAlignment="Top" Width="593" Margin="2,-89,0,-83">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="https://cdn.pixabay.com/photo/2016/03/23/17/26/music-note-1275177_960_720.png" Stretch="Uniform"/>
-                
+
             </Image.OpacityMask>
         </Image>
         <Label x:Name="lblRecent" Content="Recently Played" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,39,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="20"/>
         <Label x:Name="lblSuggested" Content="Suggested" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="385,39,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="20"/>
         <Rectangle Fill="#FF363636" HorizontalAlignment="Left" Height="87" Margin="0,334,0,0" Stroke="#FF363636" VerticalAlignment="Top" Width="595"/>
-
+       
+        <Button Content="Get Playlist&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="322" Margin="138,348,0,0" Height="47" Click="Button_ClickAsync"/>
+        <ListBox x:Name="lstRecentPlayList" HorizontalAlignment="Left" Height="179" VerticalAlignment="Top" Width="152" RenderTransformOrigin="1.055,1.151" Margin="88,80,0,0"/>
+        <ListBox x:Name="lstSuggestedPlayList" HorizontalAlignment="Left" Height="179" VerticalAlignment="Top" Width="152" RenderTransformOrigin="1.055,1.151" Margin="354,80,0,0"/>
     </Grid>
 </Window>
