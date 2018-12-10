@@ -156,9 +156,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore1.csproj">
+    <ProjectReference Include="..\..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore.csproj">
       <Project>{eb79f6c5-a215-47cb-8d0e-4483f13d41b7}</Project>
-      <Name>SpotifyApi.NetCore1</Name>
+      <Name>SpotifyApi.NetCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TWDP.Playlist.BL\TWDP.Playlist.BL.csproj">
       <Project>{6ff96a65-f716-4d07-be8e-ba1a265d5cfb}</Project>
