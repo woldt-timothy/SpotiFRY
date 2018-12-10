@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDP.PlayList.BL.Test", "TW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDP.PlayList.UI", "TWDP.PlayList.UI\TWDP.PlayList.UI.csproj", "{72701DC1-4825-4979-ABB4-97AB74710AE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyApi.NetCore", "..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore.csproj", "{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyApi.NetCore1", "..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore1.csproj", "{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
