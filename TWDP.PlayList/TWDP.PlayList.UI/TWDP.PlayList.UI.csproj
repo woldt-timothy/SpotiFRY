@@ -114,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="LoginScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +125,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LoginScreen.xaml.cs">
+      <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -156,14 +163,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore.csproj">
-      <Project>{eb79f6c5-a215-47cb-8d0e-4483f13d41b7}</Project>
+    <ProjectReference Include="..\SpotifyApi.NetCore\SpotifyApi.NetCore.csproj">
+      <Project>{ce15e2c4-728a-4507-89e2-0f85634b54a6}</Project>
       <Name>SpotifyApi.NetCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\TWDP.Playlist.BL\TWDP.Playlist.BL.csproj">
       <Project>{6ff96a65-f716-4d07-be8e-ba1a265d5cfb}</Project>
       <Name>TWDP.Playlist.BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

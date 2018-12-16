@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDP.PlayList.BL.Test", "TW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TWDP.PlayList.UI", "TWDP.PlayList.UI\TWDP.PlayList.UI.csproj", "{72701DC1-4825-4979-ABB4-97AB74710AE7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyApi.NetCore", "..\..\..\..\Desktop\SpotifyApi.NetCore-master\src\SpotifyApi.NetCore\SpotifyApi.NetCore.csproj", "{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyApi.NetCore", "SpotifyApi.NetCore\SpotifyApi.NetCore.csproj", "{CE15E2C4-728A-4507-89E2-0F85634B54A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,10 +49,10 @@ Global
 		{72701DC1-4825-4979-ABB4-97AB74710AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72701DC1-4825-4979-ABB4-97AB74710AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72701DC1-4825-4979-ABB4-97AB74710AE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB79F6C5-A215-47CB-8D0E-4483F13D41B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE15E2C4-728A-4507-89E2-0F85634B54A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE15E2C4-728A-4507-89E2-0F85634B54A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE15E2C4-728A-4507-89E2-0F85634B54A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE15E2C4-728A-4507-89E2-0F85634B54A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,8 @@ using SpotifyApi.NetCore;
 using System.IO;
 using System.Net;
 using TWDP.Playlist.BL;
+using System.Net;
+using System.Net.Mail;
 
 namespace TWDP.PlayList.UI
 {
@@ -35,7 +37,10 @@ namespace TWDP.PlayList.UI
         public MainWindow()
         {
             InitializeComponent();
-
+            if(btnEmail.IsMouseOver == true)
+            {
+                btnEmail.Background = Brushes.Green;
+            }
         }
 
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
@@ -140,6 +145,65 @@ namespace TWDP.PlayList.UI
 
 
 
+        }
+
+        private void btnEmail_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                //put your SMTP address and port here.
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                //Put the email address
+                mail.From = new MailAddress("playlsitmakerbeta@gmail.com");
+                //Put the email where you want to send.
+                mail.To.Add("Dalton5699@hotmail.com");
+
+                mail.Subject = "Your Playlsit Is Finally Here!";
+
+                StringBuilder sbBody = new StringBuilder();
+
+                sbBody.AppendLine("Hello Customer,");
+
+                sbBody.AppendLine("Here is the Playlist that you have requested via Playlist Finder, Enjoy!");
+
+                sbBody.AppendLine(  lstSuggestedPlayList.ToString() );
+
+                mail.Body = sbBody.ToString();
+
+                //Your log file path
+                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(@"C:\Logs\CheckoutPOS.log");
+
+                mail.Attachments.Add(attachment);
+
+                //Your username and password!
+                SmtpServer.Credentials = new System.Net.NetworkCredential("playlsitmakerbeta@gmail.com", "PlaylistMaker21");
+                //Set Smtp Server port
+                SmtpServer.Port = 465;
+               // SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+                MessageBox.Show("The email has been sent!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show("An Error Occured");
+
+            }
+
+
+            //GMAIL ACCOUNT INFO
+            //Username: playlsitmakerbeta@gmail.com
+            //Password: PlaylistMaker21
+
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginScreen frm2 = new LoginScreen();
+            frm2.Show();
+            this.Close();
         }
     }
 }
