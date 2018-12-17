@@ -63,23 +63,22 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\tblUser.sql" />
-    <Build Include="Tables\tblSuggestedSong.sql" />
-    <Build Include="Tables\tblUserSuggestedSong.sql" />
-    <Build Include="StoredProcedures\spSuggestedSongTitle.sql" />
+    <Build Include="Tables\tblSuggestedPlaylist.sql" />
+    <Build Include="Tables\tblUSP.sql" />
+    <Build Include="Tables\tblSpotifyClientInformation.sql" />
+    <Build Include="StoredProcedures\spSuggestedPlaylist.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="TWDP.PlayList.DB.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DefaultData\SuggestedSong.sql" />
     <None Include="DefaultData\User.sql" />
-    <None Include="DefaultData\UserSuggestedSong.sql" />
+    <None Include="DefaultData\SuggestedPlaylist.sql" />
+    <None Include="DefaultData\USP.sql" />
+    <None Include="DefaultData\SpotifyClientInformation.sql" />
     <None Include="TWDP.PlayList.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PreDeploy Include="Script.PreDeployment1.sql" />
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Script.PostDeployment1.sql" />
+    <PreDeploy Include="Script.PreDeployment1.sql" />
   </ItemGroup>
 </Project>

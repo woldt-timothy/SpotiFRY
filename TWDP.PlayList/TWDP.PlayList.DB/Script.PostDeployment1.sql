@@ -9,6 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\DefaultData\SuggestedSong.sql
+:r .\DefaultData\SuggestedPlaylist.sql
 :r .\DefaultData\User.sql
-:r .\DefaultData\UserSuggestedSong.sql
+:r .\DefaultData\USP.sql
+:r .\DefaultData\SpotifyClientInformation.sql

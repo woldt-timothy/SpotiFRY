@@ -1,6 +1,6 @@
 ﻿BEGIN
 
-	INSERT INTO tblUserSuggestedSong(UserSuggestedSongId, UserId, SuggestedSongId)
+	INSERT INTO tblUSP(USPId, UserId, SuggestedPlaylistId)
 
 	VALUES
 		(NEWID(), NEWID(), NEWID()),

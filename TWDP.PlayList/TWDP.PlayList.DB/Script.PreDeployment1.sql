@@ -10,5 +10,6 @@
 --------------------------------------------------------------------------------------
 */
 DROP TABLE IF EXISTS tblUser
-DROP TABLE IF EXISTS tblSuggestedSong
-DROP TABLE IF EXISTS tblUserSuggestedSong
+DROP TABLE IF EXISTS tblSuggestedPlaylist
+DROP TABLE IF EXISTS tblUSP
+DROP TABLE IF EXISTS tblSpotifyClientInformation
