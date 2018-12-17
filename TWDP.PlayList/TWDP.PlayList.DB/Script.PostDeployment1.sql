@@ -12,4 +12,3 @@ Post-Deployment Script Template
 :r .\DefaultData\SuggestedPlaylist.sql
 :r .\DefaultData\User.sql
 :r .\DefaultData\USP.sql
-:r .\DefaultData\SpotifyClientInformation.sql

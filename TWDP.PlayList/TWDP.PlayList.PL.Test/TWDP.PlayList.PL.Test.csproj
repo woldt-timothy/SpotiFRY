@@ -56,7 +56,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="utSpotifyInformation.cs" />
     <Compile Include="utUWP.cs" />
     <Compile Include="urSuggestedPlaylist.cs" />
     <Compile Include="utUser.cs" />

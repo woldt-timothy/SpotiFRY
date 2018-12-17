@@ -27,7 +27,6 @@ namespace TWDP.PlayList.PL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tblSpotifyClientInformation> tblSpotifyClientInformations { get; set; }
         public virtual DbSet<tblSuggestedPlaylist> tblSuggestedPlaylists { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
         public virtual DbSet<tblUSP> tblUSPs { get; set; }

@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="woldtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tblSpotifyClientInformation">
-          <Key>
-            <PropertyRef Name="SpotifyInformationId" />
-          </Key>
-          <Property Name="SpotifyInformationId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SpotifyClientId" Type="varchar" MaxLength="400" Nullable="false" />
-          <Property Name="SpotifyClientSecret" Type="varchar" MaxLength="400" Nullable="false" />
-        </EntityType>
         <EntityType Name="tblSuggestedPlaylist">
           <Key>
             <PropertyRef Name="SuggestedPlaylistId" />
@@ -27,11 +18,12 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="LoginId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="LoginId" Type="varchar" MaxLength="100" />
+          <Property Name="SpotifyId" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblUSP">
           <Key>
@@ -43,7 +35,6 @@
         </EntityType>
         <Function Name="spSuggestedPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="woldtModelStoreContainer">
-          <EntitySet Name="tblSpotifyClientInformation" EntityType="Self.tblSpotifyClientInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSuggestedPlaylist" EntityType="Self.tblSuggestedPlaylist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUSP" EntityType="Self.tblUSP" Schema="dbo" store:Type="Tables" />
@@ -54,21 +45,11 @@
       <Schema Namespace="woldtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="playlistEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="spSuggestedSongTitle" ReturnType="Collection(String)" />
-          <EntitySet Name="tblSpotifyClientInformations" EntityType="woldtModel.tblSpotifyClientInformation" />
           <EntitySet Name="tblSuggestedPlaylists" EntityType="woldtModel.tblSuggestedPlaylist" />
           <EntitySet Name="tblUsers" EntityType="woldtModel.tblUser" />
           <EntitySet Name="tblUSPs" EntityType="woldtModel.tblUSP" />
           <FunctionImport Name="spSuggestedPlaylist" ReturnType="Collection(String)" />
         </EntityContainer>
-        <EntityType Name="tblSpotifyClientInformation">
-          <Key>
-            <PropertyRef Name="SpotifyInformationId" />
-          </Key>
-          <Property Name="SpotifyInformationId" Type="Guid" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="SpotifyClientId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="SpotifyClientSecret" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="tblSuggestedPlaylist">
           <Key>
             <PropertyRef Name="SuggestedPlaylistId" />
@@ -82,11 +63,12 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="LoginId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LoginId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SpotifyId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblUSP">
           <Key>
@@ -102,16 +84,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="woldtModelStoreContainer" CdmEntityContainer="playlistEntities">
-        <EntitySetMapping Name="tblSpotifyClientInformations">
-            <EntityTypeMapping TypeName="woldtModel.tblSpotifyClientInformation">
-              <MappingFragment StoreEntitySet="tblSpotifyClientInformation">
-                <ScalarProperty Name="SpotifyClientSecret" ColumnName="SpotifyClientSecret" />
-                <ScalarProperty Name="SpotifyClientId" ColumnName="SpotifyClientId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="SpotifyInformationId" ColumnName="SpotifyInformationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblSuggestedPlaylists">
             <EntityTypeMapping TypeName="woldtModel.tblSuggestedPlaylist">
               <MappingFragment StoreEntitySet="tblSuggestedPlaylist">
@@ -124,6 +96,7 @@
           <EntitySetMapping Name="tblUsers">
             <EntityTypeMapping TypeName="woldtModel.tblUser">
               <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="SpotifyId" ColumnName="SpotifyId" />
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

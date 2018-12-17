@@ -21,6 +21,7 @@ namespace TWDP.PlayList.BL.Test
             user.LastName = "Smalls";
             user.LoginId = "smallDude";
             user.Password = "apple";
+            user.SpotifyId = "Lebowski11";
             user.Insert();
 
 
@@ -67,10 +68,12 @@ namespace TWDP.PlayList.BL.Test
             User user = new User();
 
 
-            user.LoginId = "BadBadBoba";
-            user.LastName = "Time Bomb";
-            user.Password = "YoYo";
-            user.Email = "yoyo@gmail.com";
+            user.Email = "smally@yahoo.com";
+            user.FirstName = "Smally";
+            user.LastName = "Smalls";
+            user.LoginId = "smallDude";
+            user.Password = "apple";
+            user.SpotifyId = "Lebowski11";
 
             user.Update();
 
@@ -78,15 +81,15 @@ namespace TWDP.PlayList.BL.Test
             User otherUser = new User();
 
 
-            otherUser.LoadById("BadBadBoba");
+            otherUser.LoadById("smallDude");
 
 
 
 
            
-            string expected = "Time Bomb";
+            string expected = "Smally";
 
-            string actual = otherUser.LastName;
+            string actual = otherUser.FirstName;
 
             Assert.AreEqual(expected, actual);
 

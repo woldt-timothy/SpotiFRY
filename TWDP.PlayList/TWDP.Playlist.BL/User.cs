@@ -15,6 +15,7 @@ namespace TWDP.Playlist.BL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string LoginId { get; set; }
+        public string SpotifyId { get; set; }
 
 
 
@@ -36,6 +37,8 @@ namespace TWDP.Playlist.BL
                     user.LastName = LastName;
                     user.LoginId = LoginId;
                     user.Password = GetHash();
+                    user.SpotifyId = GetHashSpotifyId();
+
                     
 
                     dc.tblUsers.Add(user);
@@ -51,7 +54,15 @@ namespace TWDP.Playlist.BL
             }
         }
 
- 
+        private string GetHashSpotifyId()
+        {
+            using (var hash = new System.Security.Cryptography.SHA1Managed())
+            {
+                var hashbytes = System.Text.Encoding.UTF8.GetBytes(this.SpotifyId);
+                return Convert.ToBase64String(hash.ComputeHash(hashbytes));
+            }
+        }
+
 
         private string GetHash()
         {
@@ -150,8 +161,10 @@ namespace TWDP.Playlist.BL
                     {
                         user.Email = Email;
                         user.LastName = LastName;
+                        user.FirstName = FirstName;
                         user.LoginId = LoginId;
                         user.Password = GetHash();
+                        user.SpotifyId = GetHashSpotifyId();
                         dc.SaveChanges();
                     }
 

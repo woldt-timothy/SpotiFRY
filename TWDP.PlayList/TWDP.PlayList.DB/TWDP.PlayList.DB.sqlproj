@@ -65,14 +65,12 @@
     <Build Include="Tables\tblUser.sql" />
     <Build Include="Tables\tblSuggestedPlaylist.sql" />
     <Build Include="Tables\tblUSP.sql" />
-    <Build Include="Tables\tblSpotifyClientInformation.sql" />
     <Build Include="StoredProcedures\spSuggestedPlaylist.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultData\User.sql" />
     <None Include="DefaultData\SuggestedPlaylist.sql" />
     <None Include="DefaultData\USP.sql" />
-    <None Include="DefaultData\SpotifyClientInformation.sql" />
     <None Include="TWDP.PlayList.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,7 @@ namespace TWDP.PlayList.PL.Test
                 newrow.FirstName = "Jimmy";
                 newrow.LastName = "Johnson";
                 newrow.LoginId = "jimbo528";
+                newrow.SpotifyId = "TonyBony";
                
                 
 
