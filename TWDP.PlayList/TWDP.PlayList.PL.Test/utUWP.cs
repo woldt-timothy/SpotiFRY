@@ -7,41 +7,38 @@ using System.Linq;
 namespace TWDP.PlayList.PL.Test
 {
     [TestClass]
-    public class utUser
+    public class utUWP
     {
         [TestMethod]
-        public void UserInsert()
+        public void USPinsert()
         {
             using (playlistEntities dc = new playlistEntities())
             {
-                var beforerows = from t in dc.tblUsers
+
+                var beforerows = from t in dc.tblUSPs
                                  select t;
 
                 int beforecount = beforerows.Count();
 
 
-                tblUser newrow;
+                tblUSP newrow;
 
-                newrow = new tblUser();
-
-
-                
-                newrow.Email = "littlejimmy@gmail.com";
-                newrow.Password = "987zyx";
-                newrow.FirstName = "Jimmy";
-                newrow.LastName = "Johnson";
-                newrow.LoginId = "jimbo528";
-               
-                
+                newrow = new tblUSP();
 
 
-                dc.tblUsers.Add(newrow);
+                newrow.USPId = Guid.NewGuid();
+                newrow.UserId = Guid.NewGuid();
+                newrow.SuggestedPlaylistId = Guid.NewGuid();
+
+
+
+                dc.tblUSPs.Add(newrow);
 
 
                 dc.SaveChanges();
 
 
-                var afterrows = from t in dc.tblUsers
+                var afterrows = from t in dc.tblUSPs
                                 select t;
                 int aftercount = afterrows.Count();
 
@@ -52,14 +49,12 @@ namespace TWDP.PlayList.PL.Test
 
         }
 
-
-
         [TestMethod]
-        public void UserLoadTest()
+        public void USPloadtest()
         {
             using (playlistEntities dc = new playlistEntities())
             {
-                var rows = from t in dc.tblUsers
+                var rows = from t in dc.tblUSPs
                            select t;
                 Assert.AreEqual(rows.Count(), 5);
             }
@@ -67,27 +62,35 @@ namespace TWDP.PlayList.PL.Test
 
         }
 
+
         [TestMethod]
-        public void UserDeleteTest()
+        public void USPDeletetest()
         {
+
+            Guid guid = Guid.Parse("cb4c239f-0307-4d57-ad1e-0285ae17ce85");
+
+
+
+
+
             using (playlistEntities dc = new playlistEntities())
             {
-                var beforerows = from t in dc.tblUsers
+
+                var beforerows = from t in dc.tblUSPs
                                  select t;
 
                 int beforecount = beforerows.Count();
 
 
-                tblUser row = (from t in dc.tblUsers
-                             where t.Email == "littlejimmy@gmail.com"
-                               select t).FirstOrDefault();
+                tblUSP row = (from t in dc.tblUSPs
+                                            where t.USPId == guid
+                                            select t).FirstOrDefault();
 
-                dc.tblUsers.Remove(row);
+                dc.tblUSPs.Remove(row);
                 dc.SaveChanges();
 
 
-
-                var afterrows = from t in dc.tblUsers
+                var afterrows = from t in dc.tblUSPs
                                 select t;
                 int aftercount = afterrows.Count();
 

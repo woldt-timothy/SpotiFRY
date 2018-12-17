@@ -56,9 +56,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="utUserSuggestedSong.cs" />
+    <Compile Include="utSpotifyInformation.cs" />
+    <Compile Include="utUWP.cs" />
+    <Compile Include="urSuggestedPlaylist.cs" />
     <Compile Include="utUser.cs" />
-    <Compile Include="utSuggestedSong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TWDP.Playlist.BL\TWDP.Playlist.BL.csproj">
+      <Project>{6ff96a65-f716-4d07-be8e-ba1a265d5cfb}</Project>
+      <Name>TWDP.Playlist.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TWDP.PlayList.PL\TWDP.PlayList.PL.csproj">
       <Project>{c12c15ce-74a7-4f41-856a-e2af188fc220}</Project>
       <Name>TWDP.PlayList.PL</Name>

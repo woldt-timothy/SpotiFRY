@@ -103,7 +103,7 @@ namespace SpotifyApi.NetCore
             if (types == null || types.Length == 0) throw new ArgumentNullException("types");
 
             string typeQuery = string.Join(",",types);
-            string url = $"{BaseUrl}/search?q={Uri.EscapeDataString(query)}&type={typeQuery}";
+            string url = $"{BaseUrl}/search?q={Uri.EscapeDataString(query)}&type={typeQuery}&limit=50";
 
             if (!string.IsNullOrWhiteSpace(market))
             {

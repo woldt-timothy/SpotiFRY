@@ -61,7 +61,7 @@
     <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="utSong.cs" />
+    <Compile Include="utPlayList.cs" />
     <Compile Include="utUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

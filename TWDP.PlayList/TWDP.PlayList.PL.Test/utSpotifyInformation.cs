@@ -7,41 +7,37 @@ using System.Linq;
 namespace TWDP.PlayList.PL.Test
 {
     [TestClass]
-    public class utUser
+    public class utSpotifyInformation
     {
         [TestMethod]
-        public void UserInsert()
+        public void SpotifyInsert()
         {
+
+
             using (playlistEntities dc = new playlistEntities())
             {
-                var beforerows = from t in dc.tblUsers
+                var beforerows = from t in dc.tblSpotifyClientInformations
                                  select t;
 
                 int beforecount = beforerows.Count();
 
+                tblSpotifyClientInformation newrow;
 
-                tblUser newrow;
+                newrow = new tblSpotifyClientInformation();
 
-                newrow = new tblUser();
-
-
-                
-                newrow.Email = "littlejimmy@gmail.com";
-                newrow.Password = "987zyx";
-                newrow.FirstName = "Jimmy";
-                newrow.LastName = "Johnson";
-                newrow.LoginId = "jimbo528";
-               
-                
+                newrow.SpotifyInformationId = Guid.NewGuid();
+                newrow.UserId = Guid.NewGuid();
+                newrow.SpotifyClientSecret = "Hash5";
+                newrow.SpotifyClientId = "Hash6";
 
 
-                dc.tblUsers.Add(newrow);
 
+
+                dc.tblSpotifyClientInformations.Add(newrow);
 
                 dc.SaveChanges();
 
-
-                var afterrows = from t in dc.tblUsers
+                var afterrows = from t in dc.tblSpotifyClientInformations
                                 select t;
                 int aftercount = afterrows.Count();
 
@@ -52,14 +48,12 @@ namespace TWDP.PlayList.PL.Test
 
         }
 
-
-
         [TestMethod]
-        public void UserLoadTest()
+        public void SuggestedPlayListLoadTest()
         {
             using (playlistEntities dc = new playlistEntities())
             {
-                var rows = from t in dc.tblUsers
+                var rows = from t in dc.tblSpotifyClientInformations
                            select t;
                 Assert.AreEqual(rows.Count(), 5);
             }
@@ -67,33 +61,39 @@ namespace TWDP.PlayList.PL.Test
 
         }
 
+
+
         [TestMethod]
-        public void UserDeleteTest()
+        public void SuggestedPlayListDeleteTest()
         {
             using (playlistEntities dc = new playlistEntities())
             {
-                var beforerows = from t in dc.tblUsers
+
+                var beforerows = from t in dc.tblSpotifyClientInformations
                                  select t;
 
                 int beforecount = beforerows.Count();
 
 
-                tblUser row = (from t in dc.tblUsers
-                             where t.Email == "littlejimmy@gmail.com"
-                               select t).FirstOrDefault();
+                tblSpotifyClientInformation row = (from t in dc.tblSpotifyClientInformations
+                                            where t.SpotifyClientSecret == "Hash5"
+                                            select t).FirstOrDefault();
 
-                dc.tblUsers.Remove(row);
+                dc.tblSpotifyClientInformations.Remove(row);
                 dc.SaveChanges();
 
 
 
-                var afterrows = from t in dc.tblUsers
+                var afterrows = from t in dc.tblSpotifyClientInformations
                                 select t;
                 int aftercount = afterrows.Count();
 
                 Assert.AreEqual(beforecount, aftercount + 1);
+                
+
             }
         }
+
 
 
 

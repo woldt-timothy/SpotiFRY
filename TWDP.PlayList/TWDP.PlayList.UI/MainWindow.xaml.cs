@@ -30,17 +30,13 @@ namespace TWDP.PlayList.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-
-
-        public MainWindow()
+         public MainWindow()
         {
-            InitializeComponent();
-            if(btnEmail.IsMouseOver == true)
-            {
-                btnEmail.Background = Brushes.Green;
-            }
+                    InitializeComponent();
+                    if (btnEmail.IsMouseOver == true)
+                    {
+                        btnEmail.Background = Brushes.Green;
+                    }
         }
 
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
@@ -48,102 +44,72 @@ namespace TWDP.PlayList.UI
 
             const string username = "woldt.timothy";
             const string playlistId = "64CntkO6kptPuFglj6h5Os";
-            string result;
+            
             var http = new HttpClient();
             var accounts = new AccountsService(http, ConfigurationHelper.GetLocalConfig());
-
             var api = new PlaylistsApi(http, accounts);
 
 
+            List<string> artistList = new List<string>();
 
-
-            List<string> stringList = new List<string>();
-
-            // Act
             var response = await api.GetTracks(username, playlistId);
 
             for (int i = 0; i < response.Items.Length; i++)
             {
-                string songTitle = response.Items[i].Track.Name.ToString();
-                string songArtist = response.Items[i].Track.Artists[0].Name.ToString();
-                string songAlbumTitle = response.Items[i].Track.Album.Name.ToString();
-                //string songPreviewPath = response.Items[i].Track.PreviewUrl.ToString();
+                    string songArtist = response.Items[i].Track.Artists[0].Name.ToString();
 
-                //response.Items[i].Track.PreviewUrl != null
-
-
-                if (response.Items[i].Track.Name != null)
-                {
-
-                    stringList.Add(songTitle);
-                }
-
-
+                    if (response.Items[i].Track.Artists[0].Name != null)
+                    {
+                        artistList.Add(songArtist);
+                    }
 
             }
 
-
-
-
-
-            lstRecentPlayList.ItemsSource = stringList;
+            lstRecentPlayList.ItemsSource = artistList;
 
 
             Random random = new Random();
-            int randomNumber1 = random.Next(0, 40);
+            int randomNumber = random.Next(0, response.Items.Length);
 
 
+            string query = artistList[randomNumber];
 
-            string query = stringList[randomNumber1];
             if (query != null)
             {
-                var httpNewPlayList = new HttpClient();
-                //test
 
+                var httpNewPlayList = new HttpClient();
                 api = new PlaylistsApi(http, accounts);
 
-                List<string> stringList2 = new List<string>();
+                List<string> playlistList = new List<string>();
 
-                var response2 = await api.SearchPlaylists(query);
+                var response1 = await api.SearchPlaylists(query);
 
                 string playlistTitle;
-                for (int i = 0; i < response2.Items.Length; i++)
+
+                for (int i = 0; i < response1.Items.Length; i++)
                 {
-
-
-
-
-                    if (response2.Items[i].Name != null)
+                    if (response1.Items[i].Name != null)
                     {
-
-
-                        playlistTitle = response2.Items[i].Name.ToString();
-
-                        stringList2.Add(playlistTitle);
+                        playlistTitle = response1.Items[i].Name.ToString();
+                        playlistList.Add(playlistTitle);
                     }
-
                 }
 
-                lstSuggestedPlayList.ItemsSource = stringList2;
 
+                var duplicateKeys = playlistList.GroupBy(x => x)
+                .Where(group => group.Count() > 1)
+                  .Select(group => group.Key);
 
+                var resultsYU = duplicateKeys.ToList();
 
+                for (int i = 0; i < resultsYU.Count; i++)
+                {
+                    string duplicatePlayList = resultsYU[i];
+                    playlistList.RemoveAll(p => p.StartsWith(duplicatePlayList));
+                }
 
-
+                lstSuggestedPlayList.ItemsSource = playlistList;
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
 
@@ -167,7 +133,7 @@ namespace TWDP.PlayList.UI
 
                 sbBody.AppendLine("Here is the Playlist that you have requested via Playlist Finder, Enjoy!");
 
-                sbBody.AppendLine(  lstSuggestedPlayList.ToString() );
+                sbBody.AppendLine(lstSuggestedPlayList.ToString());
 
                 mail.Body = sbBody.ToString();
 
@@ -180,7 +146,7 @@ namespace TWDP.PlayList.UI
                 SmtpServer.Credentials = new System.Net.NetworkCredential("playlsitmakerbeta@gmail.com", "PlaylistMaker21");
                 //Set Smtp Server port
                 SmtpServer.Port = 465;
-               // SmtpServer.EnableSsl = true;
+                // SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
                 MessageBox.Show("The email has been sent!");
