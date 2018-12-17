@@ -96,6 +96,24 @@ namespace TWDP.PlayList.BL.Test
 
         }
 
+        [TestMethod]
+        public void LoginTest()
+        {
+            User user = new User();
+            user.LoginId = "woldt";
+            user.Password = "maple";
+            if (user.Login() == true)
+            {
+                Assert.AreEqual(true, user.Login());
+            }
+            else
+            {
+
+            }
+
+
+
+        }
 
 
 
