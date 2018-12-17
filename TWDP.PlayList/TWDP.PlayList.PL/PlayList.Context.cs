@@ -27,13 +27,19 @@ namespace TWDP.PlayList.PL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tblSuggestedSong> tblSuggestedSongs { get; set; }
+        public virtual DbSet<tblSpotifyClientInformation> tblSpotifyClientInformations { get; set; }
+        public virtual DbSet<tblSuggestedPlaylist> tblSuggestedPlaylists { get; set; }
         public virtual DbSet<tblUser> tblUsers { get; set; }
-        public virtual DbSet<tblUserSuggestedSong> tblUserSuggestedSongs { get; set; }
+        public virtual DbSet<tblUSP> tblUSPs { get; set; }
     
         public virtual ObjectResult<string> spSuggestedSongTitle()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spSuggestedSongTitle");
+        }
+    
+        public virtual ObjectResult<string> spSuggestedPlaylist()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spSuggestedPlaylist");
         }
     }
 }

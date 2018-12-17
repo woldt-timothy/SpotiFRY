@@ -12,12 +12,10 @@ namespace TWDP.PlayList.PL
     using System;
     using System.Collections.Generic;
     
-    public partial class tblSuggestedSong
+    public partial class tblUSP
     {
-        public System.Guid SuggestedSongId { get; set; }
-        public string SuggestedSongTitle { get; set; }
-        public string SuggestedSongArtist { get; set; }
-        public string SuggestedSongAlbumTitle { get; set; }
-        public string SuggestedSongImagePath { get; set; }
+        public System.Guid USPId { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid SuggestedPlaylistId { get; set; }
     }
 }

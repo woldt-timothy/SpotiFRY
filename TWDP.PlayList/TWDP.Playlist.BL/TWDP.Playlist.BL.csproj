@@ -90,7 +90,7 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationHelper.cs" />
-    <Compile Include="Song.cs" />
+    <Compile Include="Playlist.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -66,13 +66,16 @@
       <DependentUpon>PlayList.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tblSuggestedSong.cs">
+    <Compile Include="tblSpotifyClientInformation.cs">
+      <DependentUpon>PlayList.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSuggestedPlaylist.cs">
       <DependentUpon>PlayList.tt</DependentUpon>
     </Compile>
     <Compile Include="tblUser.cs">
       <DependentUpon>PlayList.tt</DependentUpon>
     </Compile>
-    <Compile Include="tblUserSuggestedSong.cs">
+    <Compile Include="tblUSP.cs">
       <DependentUpon>PlayList.tt</DependentUpon>
     </Compile>
   </ItemGroup>

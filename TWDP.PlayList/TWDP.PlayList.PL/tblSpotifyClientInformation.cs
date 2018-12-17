@@ -12,10 +12,11 @@ namespace TWDP.PlayList.PL
     using System;
     using System.Collections.Generic;
     
-    public partial class tblUserSuggestedSong
+    public partial class tblSpotifyClientInformation
     {
-        public System.Guid UserSuggestedSongId { get; set; }
+        public System.Guid SpotifyInformationId { get; set; }
         public System.Guid UserId { get; set; }
-        public System.Guid SuggestedSongId { get; set; }
+        public string SpotifyClientId { get; set; }
+        public string SpotifyClientSecret { get; set; }
     }
 }

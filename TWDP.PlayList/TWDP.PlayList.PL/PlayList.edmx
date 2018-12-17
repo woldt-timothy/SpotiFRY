@@ -5,15 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="woldtModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tblSuggestedSong">
+        <EntityType Name="tblSpotifyClientInformation">
           <Key>
-            <PropertyRef Name="SuggestedSongId" />
+            <PropertyRef Name="SpotifyInformationId" />
           </Key>
-          <Property Name="SuggestedSongId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SuggestedSongTitle" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="SuggestedSongArtist" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="SuggestedSongAlbumTitle" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="SuggestedSongImagePath" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="SpotifyInformationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SpotifyClientId" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="SpotifyClientSecret" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblSuggestedPlaylist">
+          <Key>
+            <PropertyRef Name="SuggestedPlaylistId" />
+          </Key>
+          <Property Name="SuggestedPlaylistId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SuggestedPlaylistTitle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ImagePath" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -26,73 +33,91 @@
           <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="LoginId" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblUserSuggestedSong">
+        <EntityType Name="tblUSP">
           <Key>
-            <PropertyRef Name="UserSuggestedSongId" />
+            <PropertyRef Name="USPId" />
           </Key>
-          <Property Name="UserSuggestedSongId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="USPId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="SuggestedSongId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SuggestedPlaylistId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <Function Name="spSuggestedSongTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spSuggestedPlaylist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="woldtModelStoreContainer">
-          <EntitySet Name="tblSuggestedSong" EntityType="Self.tblSuggestedSong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSpotifyClientInformation" EntityType="Self.tblSpotifyClientInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSuggestedPlaylist" EntityType="Self.tblSuggestedPlaylist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblUserSuggestedSong" EntityType="Self.tblUserSuggestedSong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUSP" EntityType="Self.tblUSP" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="woldtModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tblSuggestedSong">
+        <EntityContainer Name="playlistEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="spSuggestedSongTitle" ReturnType="Collection(String)" />
+          <EntitySet Name="tblSpotifyClientInformations" EntityType="woldtModel.tblSpotifyClientInformation" />
+          <EntitySet Name="tblSuggestedPlaylists" EntityType="woldtModel.tblSuggestedPlaylist" />
+          <EntitySet Name="tblUsers" EntityType="woldtModel.tblUser" />
+          <EntitySet Name="tblUSPs" EntityType="woldtModel.tblUSP" />
+          <FunctionImport Name="spSuggestedPlaylist" ReturnType="Collection(String)" />
+        </EntityContainer>
+        <EntityType Name="tblSpotifyClientInformation">
           <Key>
-            <PropertyRef Name="SuggestedSongId" />
+            <PropertyRef Name="SpotifyInformationId" />
           </Key>
-          <Property Name="SuggestedSongId" Type="Guid" Nullable="false" />
-          <Property Name="SuggestedSongTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SuggestedSongArtist" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SuggestedSongAlbumTitle" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SuggestedSongImagePath" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SpotifyInformationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="SpotifyClientId" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="SpotifyClientSecret" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblSuggestedPlaylist">
+          <Key>
+            <PropertyRef Name="SuggestedPlaylistId" />
+          </Key>
+          <Property Name="SuggestedPlaylistId" Type="Guid" Nullable="false" />
+          <Property Name="SuggestedPlaylistTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="LoginId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tblUserSuggestedSong">
+        <EntityType Name="tblUSP">
           <Key>
-            <PropertyRef Name="UserSuggestedSongId" />
+            <PropertyRef Name="USPId" />
           </Key>
-          <Property Name="UserSuggestedSongId" Type="Guid" Nullable="false" />
+          <Property Name="USPId" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="SuggestedSongId" Type="Guid" Nullable="false" />
+          <Property Name="SuggestedPlaylistId" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="playlistEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblSuggestedSongs" EntityType="Self.tblSuggestedSong" />
-          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
-          <EntitySet Name="tblUserSuggestedSongs" EntityType="Self.tblUserSuggestedSong" />
-          <FunctionImport Name="spSuggestedSongTitle" ReturnType="Collection(String)" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="woldtModelStoreContainer" CdmEntityContainer="playlistEntities">
-          <EntitySetMapping Name="tblSuggestedSongs">
-            <EntityTypeMapping TypeName="woldtModel.tblSuggestedSong">
-              <MappingFragment StoreEntitySet="tblSuggestedSong">
-                <ScalarProperty Name="SuggestedSongId" ColumnName="SuggestedSongId" />
-                <ScalarProperty Name="SuggestedSongTitle" ColumnName="SuggestedSongTitle" />
-                <ScalarProperty Name="SuggestedSongArtist" ColumnName="SuggestedSongArtist" />
-                <ScalarProperty Name="SuggestedSongAlbumTitle" ColumnName="SuggestedSongAlbumTitle" />
-                <ScalarProperty Name="SuggestedSongImagePath" ColumnName="SuggestedSongImagePath" />
+        <EntitySetMapping Name="tblSpotifyClientInformations">
+            <EntityTypeMapping TypeName="woldtModel.tblSpotifyClientInformation">
+              <MappingFragment StoreEntitySet="tblSpotifyClientInformation">
+                <ScalarProperty Name="SpotifyClientSecret" ColumnName="SpotifyClientSecret" />
+                <ScalarProperty Name="SpotifyClientId" ColumnName="SpotifyClientId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SpotifyInformationId" ColumnName="SpotifyInformationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSuggestedPlaylists">
+            <EntityTypeMapping TypeName="woldtModel.tblSuggestedPlaylist">
+              <MappingFragment StoreEntitySet="tblSuggestedPlaylist">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="SuggestedPlaylistTitle" ColumnName="SuggestedPlaylistTitle" />
+                <ScalarProperty Name="SuggestedPlaylistId" ColumnName="SuggestedPlaylistId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -102,22 +127,22 @@
                 <ScalarProperty Name="LoginId" ColumnName="LoginId" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblUserSuggestedSongs">
-            <EntityTypeMapping TypeName="woldtModel.tblUserSuggestedSong">
-              <MappingFragment StoreEntitySet="tblUserSuggestedSong">
-                <ScalarProperty Name="UserSuggestedSongId" ColumnName="UserSuggestedSongId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="SuggestedSongId" ColumnName="SuggestedSongId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spSuggestedSongTitle" FunctionName="woldtModel.Store.spSuggestedSongTitle" />
+          <EntitySetMapping Name="tblUSPs">
+            <EntityTypeMapping TypeName="woldtModel.tblUSP">
+              <MappingFragment StoreEntitySet="tblUSP">
+                <ScalarProperty Name="SuggestedPlaylistId" ColumnName="SuggestedPlaylistId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="USPId" ColumnName="USPId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spSuggestedPlaylist" FunctionName="woldtModel.Store.spSuggestedPlaylist" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
