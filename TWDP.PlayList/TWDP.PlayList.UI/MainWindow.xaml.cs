@@ -184,14 +184,17 @@ namespace TWDP.PlayList.UI
 
         private void lstSuggestedPlayList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ADD BACKGROUND CHANGE HERE
+            //add function to get url of image to current selected
+
             if(lstSuggestedPlayList.SelectedItems.Count <= 0)
             {
+                //default
                 imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/logo.png", UriKind.RelativeOrAbsolute));
             }
             else
             {
-                imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/test.png", UriKind.RelativeOrAbsolute));
+                //selected item background
+                imgAlbumArtwork.Source = new BitmapImage(new Uri("https://consequenceofsound.files.wordpress.com/2018/07/travis-scott-astroworld-cover-art.png?w=807", UriKind.RelativeOrAbsolute));
             }
         }
     }
