@@ -25,7 +25,7 @@ namespace TWDP.PlayList.SL.Controllers
         }
 
         // POST: api/User
-        public void Post([FromBody]User user)
+        public void Post([FromBody]TWDP.Playlist.BL.User user)
         {
             user.Insert();
         }
@@ -42,12 +42,12 @@ namespace TWDP.PlayList.SL.Controllers
             Get(loginid).Delete();
         }
 
-        // Login: api/User
-        public bool Login()
-        {
-            User user = new User();
-            return user.Login();
-        }
+        //// Login: api/User
+        //public bool Login()
+        //{
+        //    User user = new User();
+        //    return  user.Login();
+        //}
 
 
     }
