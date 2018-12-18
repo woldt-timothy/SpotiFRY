@@ -40,7 +40,10 @@ namespace TWDP.PlayList.SL.Controllers
         // DELETE: api/User/5
         public void Delete(string loginid)
         {
-            Get(loginid).Delete();
+
+            User user = new User();
+            user.LoadById(loginid);
+            user.Delete();
         }
 
         //// Login: api/User

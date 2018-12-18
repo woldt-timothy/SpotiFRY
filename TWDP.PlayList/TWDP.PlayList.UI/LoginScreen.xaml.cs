@@ -46,7 +46,9 @@ namespace TWDP.PlayList.UI
         {
             RestClient restClient = new RestClient();
             restClient.userName = "woldtman";
-            restClient.userPassword = "maple";
+
+            //actual password maple
+            restClient.userPassword = "dickface";
             restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
             restClient.makeRequest();
         }

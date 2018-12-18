@@ -38,6 +38,32 @@ namespace TWDP.PlayList.BL.Test
 
 
         [TestMethod]
+        public void LoadByLoginIdTest()
+        {
+
+            User user = new User();
+
+            
+            
+            user.LoadById("smallDude");
+
+
+            playlistEntities dc = new playlistEntities();
+
+
+
+            string expected = "Smalls";
+
+
+            Assert.AreEqual(expected, user.LastName);
+
+
+        }
+
+
+
+
+        [TestMethod]
         public void DeleteTest()
         {
 

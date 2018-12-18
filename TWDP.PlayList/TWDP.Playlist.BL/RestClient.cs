@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System;
 using System.IO;
 using System.Net;
+using Newtonsoft.Json;
+using TWDP.Playlist.BL;
 
 namespace TWDP.PlayList.UI
 {
@@ -40,13 +42,17 @@ namespace TWDP.PlayList.UI
             public string userPassword { get; set; }
 
 
-            public RestClient()
+            public RestClient(string v)
             {
                 endPoint = string.Empty;
                 httpMethod = httpVerb.GET;
             }
 
-            public string makeRequest()
+        public RestClient()
+        {
+        }
+
+        public string makeRequest()
             {
                 string strResponseValue = string.Empty;
 
@@ -70,9 +76,34 @@ namespace TWDP.PlayList.UI
                     {
                         if (responseStream != null)
                         {
-                            using (StreamReader reader = new StreamReader(responseStream))
+                            using (var s = new StreamReader(responseStream))
                             {
-                                strResponseValue = reader.ReadToEnd();
+
+                            
+
+                            strResponseValue = s.ReadToEnd();
+
+                          
+
+                            User oerr = JsonConvert.DeserializeObject<User>(strResponseValue);
+
+                         
+                                if (oerr.Password == this.userPassword)
+                                {
+                                    System.Diagnostics.Debug.WriteLine("Good Password");
+                                }
+                                else
+                                {
+                                    System.Diagnostics.Debug.WriteLine("Bad Password");
+                                }
+                                
+                                
+                            
+
+                          
+
+                           
+                            
                             }
                         }
                     }
