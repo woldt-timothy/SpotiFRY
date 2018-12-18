@@ -131,5 +131,46 @@ namespace TWDP.PlayList.SL.Test
         }
 
 
+        [TestMethod]
+        public void UpdateTest()
+        {
+            TWDP.Playlist.BL.User user = new TWDP.Playlist.BL.User();
+
+            user.LoginId= "jonBoy";
+            user.LastName = "Wally";
+            user.Password = "maple";
+            user.SpotifyId = "maple";
+            user.Email = "dicky@hotmail.com";
+            user.FirstName = "Jimmy";
+
+
+            
+
+            HttpClient client = new HttpClient();
+            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            client.BaseAddress = baseAddress;
+
+
+            string serializedUser = JsonConvert.SerializeObject(user);
+            var content = new StringContent(serializedUser);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = client.PutAsync("User", content).Result;
+
+            playlistEntities dc = new playlistEntities();
+
+
+            User user2 = new User();
+            user2.LoadById("jonBoy");
+
+            string expected = "dicky@hotmail.com";
+
+            Assert.AreEqual(expected, user2.Email);
+
+
+            
+        }
+
+
+
     }
 }
