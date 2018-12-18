@@ -21,12 +21,23 @@
 
         </Image>
         <Label x:Name="lblRecent" Content="Recently Played" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="94,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
-        <Label x:Name="lblSuggested" Content="Suggested" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="478,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
+        <Label x:Name="lblSuggested" Content="Suggested" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="490,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
         <Rectangle Fill="#FF363636" HorizontalAlignment="Left" Height="121" Margin="0,393,0,0" Stroke="#FF363636" VerticalAlignment="Top" Width="760"/>
 
         <Button Content="Get Playlist&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="187,430,0,0" Height="34" Click="Button_ClickAsync" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="22" FontFamily="Segoe UI BOLD"/>
-        <ListBox x:Name="lstRecentPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="278" RenderTransformOrigin="1.055,1.151" Margin="50,80,0,0"/>
-        <ListBox x:Name="lstSuggestedPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="331" RenderTransformOrigin="1.055,1.151" Margin="373,80,0,0" SelectionChanged="lstSuggestedPlayList_SelectionChanged"/>
+        <ListBox x:Name="lstRecentPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="297" RenderTransformOrigin="1.055,1.151" Margin="31,80,0,0" Foreground="Black">
+            <ListBox.Background>
+                <SolidColorBrush Color="White" Opacity="0.8"/>
+            </ListBox.Background>
+        </ListBox>
+        <ListBox x:Name="lstSuggestedPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="354" RenderTransformOrigin="1.055,1.151" Margin="373,80,0,0" SelectionChanged="lstSuggestedPlayList_SelectionChanged">
+            <ListBox.Foreground>
+                <SolidColorBrush Color="Black"/>
+            </ListBox.Foreground>
+            <ListBox.Background>
+                <SolidColorBrush Color="White" Opacity="0.8"/>
+            </ListBox.Background>
+        </ListBox>
         <Button x:Name="btnEmail" Content="Email Playlist" HorizontalAlignment="Left" Margin="558,430,0,0" VerticalAlignment="Top" Width="153" Background="#FF363636" BorderBrush="#FF363636" Foreground="White" Click="btnEmail_Click" Cursor="Arrow" FontFamily="Segoe UI BOLD" FontSize="22">
         </Button>
         <Image x:Name="image" HorizontalAlignment="Left" Source="Images/logo.png" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="35" Opacity="0.75">
