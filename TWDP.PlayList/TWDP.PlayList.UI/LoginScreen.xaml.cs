@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TWDP.Playlist.BL;
 
 namespace TWDP.PlayList.UI
 {
@@ -39,6 +40,15 @@ namespace TWDP.PlayList.UI
         private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
             
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            RestClient restClient = new RestClient();
+            restClient.userName = "woldtman";
+            restClient.userPassword = "maple";
+            restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
+            restClient.makeRequest();
         }
     }
 }

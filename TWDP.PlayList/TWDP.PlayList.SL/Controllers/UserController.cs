@@ -10,6 +10,7 @@ namespace TWDP.PlayList.SL.Controllers
 {
     public class UserController : ApiController
     {
+        [Authorize(Users = "DESKTOP-H8546LJ//CREATOR OWNER")]
         // GET: api/User
         public IEnumerable<string> Get()
         {

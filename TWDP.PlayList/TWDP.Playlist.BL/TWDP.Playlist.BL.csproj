@@ -91,6 +91,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Playlist.cs" />
+    <Compile Include="RestClient.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
