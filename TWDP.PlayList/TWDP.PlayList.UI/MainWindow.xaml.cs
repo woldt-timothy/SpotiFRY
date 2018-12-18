@@ -184,8 +184,6 @@ namespace TWDP.PlayList.UI
 
         private void lstSuggestedPlayList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //add function to get url of image to current selected
-
             if(lstSuggestedPlayList.SelectedItems.Count <= 0)
             {
                 //default

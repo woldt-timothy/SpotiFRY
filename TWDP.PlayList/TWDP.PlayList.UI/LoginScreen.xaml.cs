@@ -20,6 +20,8 @@ namespace TWDP.PlayList.UI
     /// </summary>
     public partial class LoginScreen : Window
     {
+        log4net.ILog log = log4net.LogManager.GetLogger("Utility.Logger");
+
         public LoginScreen()
         {
             InitializeComponent();
@@ -46,6 +48,12 @@ namespace TWDP.PlayList.UI
         {
             RestClient restClient = new RestClient();
             restClient.userName = "woldtman";
+
+            if (log.IsWarnEnabled)
+            {
+                log.Warn(txtEmail.Text);
+                lblPleaseLogin.Content = log;
+            }
 
             //actual password maple
             restClient.userPassword = "dickface";
