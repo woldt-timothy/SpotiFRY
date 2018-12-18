@@ -113,43 +113,36 @@ namespace TWDP.PlayList.UI
 
         }
 
+        private void SendEmail()
+        {
+            if (lstRecentPlayList.Items.Count <= 0)
+            {
+                MessageBox.Show("No Playlists to send, please click 'Get Playlists'", "Error");
+            }
+            else
+            {
+                string cols = string.Join("    -   ", lstSuggestedPlayList.Items.Cast<String>());
+                string mailBodyhtml = cols;
+                var msg = new MailMessage("playlistmakerbeta@gmail.com", "dalton5699@hotmail.com", "Your new playlists are finally here!", mailBodyhtml); //change my email to users email that they use to login
+                                                                                                                                                          //msg.To.Add("to2@gmail.com");
+                msg.IsBodyHtml = true;
+                var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.UseDefaultCredentials = true;
+                smtpClient.Credentials = new NetworkCredential("playlistmakerbeta@gmail.com", "PlaylistMaker21");
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(msg);
+                MessageBox.Show("Email Sent Successfully");
+            }
+        }
+
+
         private void btnEmail_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                MailMessage mail = new MailMessage();
-                //put your SMTP address and port here.
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-                //Put the email address
-                mail.From = new MailAddress("playlsitmakerbeta@gmail.com");
-                //Put the email where you want to send.
-                mail.To.Add("Dalton5699@hotmail.com");
+                SendEmail();
 
-                mail.Subject = "Your Playlsit Is Finally Here!";
 
-                StringBuilder sbBody = new StringBuilder();
-
-                sbBody.AppendLine("Hello Customer,");
-
-                sbBody.AppendLine("Here is the Playlist that you have requested via Playlist Finder, Enjoy!");
-
-                sbBody.AppendLine(lstSuggestedPlayList.ToString());
-
-                mail.Body = sbBody.ToString();
-
-                //Your log file path
-                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(@"C:\Logs\CheckoutPOS.log");
-
-                mail.Attachments.Add(attachment);
-
-                //Your username and password!
-                SmtpServer.Credentials = new System.Net.NetworkCredential("playlsitmakerbeta@gmail.com", "PlaylistMaker21");
-                //Set Smtp Server port
-                SmtpServer.Port = 465;
-                // SmtpServer.EnableSsl = true;
-
-                SmtpServer.Send(mail);
-                MessageBox.Show("The email has been sent!");
             }
             catch (Exception ex)
             {
@@ -165,11 +158,41 @@ namespace TWDP.PlayList.UI
 
         }
 
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             LoginScreen frm2 = new LoginScreen();
             frm2.Show();
             this.Close();
+        }
+
+        private void btnPreview_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            if (lstRecentPlayList.Items.Count <= 0)
+            {
+                MessageBox.Show("Please click 'Get Playlists' to load the playlists first.", "Error - No playlist to preview");
+            }
+            else if (lstSuggestedPlayList.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Please select the playlist in the 'Suggested' section to preview it.", "Error - No plsylist Selected");
+            }
+            else
+            {
+               //ADD ALL OF THE PREVIEW CODE INTO THIS SECTION
+            }
+        }
+
+        private void lstSuggestedPlayList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ADD BACKGROUND CHANGE HERE
+            if(lstSuggestedPlayList.SelectedItems.Count <= 0)
+            {
+                imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/logo.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/test.png", UriKind.RelativeOrAbsolute));
+            }
         }
     }
 }
