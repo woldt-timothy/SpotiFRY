@@ -95,6 +95,8 @@ namespace TWDP.PlayList.UI
                 string playlistTitle;
                 string playlistImagePath;
 
+                playlistListImagePath.Clear();
+                playlistListImagePaths.Clear();
                 for (int i = 0; i < response1.Items.Length; i++)
                 {
                     if (response1.Items[i].Name != null)
@@ -103,6 +105,7 @@ namespace TWDP.PlayList.UI
                         playlistTitle = response1.Items[i].Name.ToString();
                         playlistList.Add(playlistTitle);
                         playlistList2.Add(playlistTitle);
+                        
                         playlistListImagePath.Add(playlistImagePath);
                         playlistListImagePaths.Add(playlistImagePath);
                     }
