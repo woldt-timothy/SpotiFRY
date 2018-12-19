@@ -249,7 +249,7 @@ namespace TWDP.PlayList.UI
             if (lstSuggestedPlayList.SelectedItems.Count <= 0)
             {
                 //default
-                imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/logo.png", UriKind.RelativeOrAbsolute));
+                imgAlbumArtwork.Source = new BitmapImage(new Uri("https://cdn.pixabay.com/photo/2016/03/23/17/26/music-note-1275177_960_720.png", UriKind.RelativeOrAbsolute));
             }
             else
             {

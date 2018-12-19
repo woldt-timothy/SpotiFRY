@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:TWDP.PlayList.UI"
         mc:Ignorable="d"
     WindowStartupLocation="CenterScreen"
-        Title="Playlist" Height="543" Width="765.82" Background="#FF232323" BorderBrush="Black" ResizeMode="NoResize" Cursor="Arrow">
+        Title="Playlist" Height="543" Width="785.169" Background="#FF232323" BorderBrush="Black" ResizeMode="NoResize" Cursor="Arrow">
     <Window.OpacityMask>
         <SolidColorBrush Color="Black"/>
     </Window.OpacityMask>
     <Grid>
-        <Image x:Name="imgAlbumArtwork" Source="https://cdn.pixabay.com/photo/2016/03/23/17/26/music-note-1275177_960_720.png" HorizontalAlignment="Left" Height="756" VerticalAlignment="Top" Width="811" Margin="-27,-181,-24,-61" Opacity="0.255">
+        <Image x:Name="imgAlbumArtwork" Source="https://cdn.pixabay.com/photo/2016/03/23/17/26/music-note-1275177_960_720.png" HorizontalAlignment="Left" Height="786" VerticalAlignment="Top" Width="844" Margin="0,-211,-65,-61" Opacity="0.255">
             <Image.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -21,16 +21,16 @@
 
         </Image>
         <Label x:Name="lblRecent" Content="Recently Played" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="94,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
-        <Label x:Name="lblSuggested" Content="Suggested" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="490,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
-        <Rectangle Fill="#FF363636" HorizontalAlignment="Left" Height="121" Margin="0,393,0,0" Stroke="#FF363636" VerticalAlignment="Top" Width="760"/>
+        <Label x:Name="lblSuggested" Content="Suggested" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,32,0,0" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="24"/>
+        <Rectangle Fill="#FF363636" HorizontalAlignment="Left" Height="121" Margin="0,393,0,0" Stroke="#FF363636" VerticalAlignment="Top" Width="779"/>
 
-        <Button Content="Get Playlist&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="187,430,0,0" Height="34" Click="Button_ClickAsync" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="22" FontFamily="Segoe UI BOLD"/>
+        <Button Content="Get Playlist&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="318,429,0,0" Height="34" Click="Button_ClickAsync" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="22" FontFamily="Segoe UI BOLD"/>
         <ListBox x:Name="lstRecentPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="297" RenderTransformOrigin="1.055,1.151" Margin="31,80,0,0" Foreground="Black">
             <ListBox.Background>
                 <SolidColorBrush Color="White" Opacity="0.8"/>
             </ListBox.Background>
         </ListBox>
-        <ListBox x:Name="lstSuggestedPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="354" RenderTransformOrigin="1.055,1.151" Margin="373,80,0,0" SelectionChanged="lstSuggestedPlayList_SelectionChanged">
+        <ListBox x:Name="lstSuggestedPlayList" HorizontalAlignment="Left" Height="276" VerticalAlignment="Top" Width="372" RenderTransformOrigin="1.055,1.151" Margin="373,80,0,0" SelectionChanged="lstSuggestedPlayList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.Foreground>
                 <SolidColorBrush Color="Black"/>
             </ListBox.Foreground>
@@ -38,14 +38,13 @@
                 <SolidColorBrush Color="White" Opacity="0.8"/>
             </ListBox.Background>
         </ListBox>
-        <Button x:Name="btnEmail" Content="Email Playlist" HorizontalAlignment="Left" Margin="558,430,0,0" VerticalAlignment="Top" Width="153" Background="#FF363636" BorderBrush="#FF363636" Foreground="White" Click="btnEmail_Click" Cursor="Arrow" FontFamily="Segoe UI BOLD" FontSize="22">
+        <Button x:Name="btnEmail" Content="Email Playlist" HorizontalAlignment="Left" Margin="526,430,0,0" VerticalAlignment="Top" Width="153" Background="#FF363636" BorderBrush="#FF363636" Foreground="White" Click="btnEmail_Click" Cursor="Arrow" FontFamily="Segoe UI BOLD" FontSize="22">
         </Button>
         <Image x:Name="image" HorizontalAlignment="Left" Source="Images/logo.png" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="35" Opacity="0.75">
             <Image.OpacityMask>
                 <ImageBrush Stretch="Uniform" ImageSource="Images/logo.png"/>
             </Image.OpacityMask>
         </Image>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="31,430,0,0" VerticalAlignment="Top" Width="103" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click" Cursor="Arrow" FontFamily="Segoe UI BOLD" FontSize="22"/>
-        <Button x:Name="btnPreview" Content="Preview&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="151" Margin="362,429,0,0" Height="34" Click="btnPreview_ClickAsync" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontSize="22" FontFamily="Segoe UI BOLD"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="99,429,0,0" VerticalAlignment="Top" Width="103" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="btnLogout_Click" Cursor="Arrow" FontFamily="Segoe UI BOLD" FontSize="22"/>
     </Grid>
 </Window>

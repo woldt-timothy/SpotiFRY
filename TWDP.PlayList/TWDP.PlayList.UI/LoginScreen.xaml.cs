@@ -59,7 +59,7 @@ namespace TWDP.PlayList.UI
                 RestClient restClient = new RestClient();
                 restClient.userName = txtEmail.Text;
                 //actual password maple
-                restClient.userPassword = txtPassword.Text;
+                restClient.userPassword = txtPassword.Password.ToString();
                 restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
                 restClient.makeRequest();
 
@@ -71,7 +71,8 @@ namespace TWDP.PlayList.UI
             catch (Exception ex)
             {
 
-                MessageBox.Show("Login Credentials Not Right");
+                lblPleaseLogin.Content = "Wrong Username or Password, Please try again.";
+
             }
       
         }
