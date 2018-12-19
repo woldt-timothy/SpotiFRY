@@ -77,7 +77,7 @@ namespace TWDP.PlayList.UI
                 if (log.IsWarnEnabled)
                     log.Warn(txtPassword.Password.ToString());
 
-                MessageBox.Show("Logged");
+              
 
                 lblPleaseLogin.Content = "Wrong Username or Password, Please try again.";
 
