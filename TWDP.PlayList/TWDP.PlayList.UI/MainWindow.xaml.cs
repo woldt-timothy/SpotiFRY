@@ -22,6 +22,7 @@ using System.Net;
 using TWDP.Playlist.BL;
 using System.Net;
 using System.Net.Mail;
+using Newtonsoft.Json;
 
 namespace TWDP.PlayList.UI
 {
@@ -30,21 +31,26 @@ namespace TWDP.PlayList.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-         public MainWindow()
+        List<TWDP.Playlist.BL.Playlist> playlists1 = new List<Playlist.BL.Playlist>();
+
+        List<string> playlistList2 = new List<string>();
+        List<string> playlistListImagePaths = new List<string>();
+
+        public MainWindow()
         {
-                    InitializeComponent();
-                    if (btnEmail.IsMouseOver == true)
-                    {
-                        btnEmail.Background = Brushes.Green;
-                    }
+            InitializeComponent();
+            if (btnEmail.IsMouseOver == true)
+            {
+                btnEmail.Background = Brushes.Green;
+            }
         }
 
-        private async void Button_ClickAsync(object sender, RoutedEventArgs e)
+        public async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
 
             const string username = "woldt.timothy";
             const string playlistId = "64CntkO6kptPuFglj6h5Os";
-            
+
             var http = new HttpClient();
             var accounts = new AccountsService(http, ConfigurationHelper.GetLocalConfig());
             var api = new PlaylistsApi(http, accounts);
@@ -56,12 +62,12 @@ namespace TWDP.PlayList.UI
 
             for (int i = 0; i < response.Items.Length; i++)
             {
-                    string songArtist = response.Items[i].Track.Artists[0].Name.ToString();
+                string songArtist = response.Items[i].Track.Artists[0].Name.ToString();
 
-                    if (response.Items[i].Track.Artists[0].Name != null)
-                    {
-                        artistList.Add(songArtist);
-                    }
+                if (response.Items[i].Track.Artists[0].Name != null)
+                {
+                    artistList.Add(songArtist);
+                }
 
             }
 
@@ -81,32 +87,61 @@ namespace TWDP.PlayList.UI
                 api = new PlaylistsApi(http, accounts);
 
                 List<string> playlistList = new List<string>();
+                List<string> playlistListImagePath = new List<string>();
+
 
                 var response1 = await api.SearchPlaylists(query);
 
                 string playlistTitle;
+                string playlistImagePath;
 
                 for (int i = 0; i < response1.Items.Length; i++)
                 {
                     if (response1.Items[i].Name != null)
                     {
+                         playlistImagePath = response1.Items[i].Images[0].Url.ToString();
                         playlistTitle = response1.Items[i].Name.ToString();
                         playlistList.Add(playlistTitle);
+                        playlistList2.Add(playlistTitle);
+                        playlistListImagePath.Add(playlistImagePath);
+                        playlistListImagePaths.Add(playlistImagePath);
                     }
                 }
 
 
-                var duplicateKeys = playlistList.GroupBy(x => x)
-                .Where(group => group.Count() > 1)
-                  .Select(group => group.Key);
+                //var duplicateKeys = playlistList.GroupBy(x => x)
+                //.Where(group => group.Count() > 1)
+                //  .Select(group => group.Key);
 
-                var resultsYU = duplicateKeys.ToList();
+                //var resultsYU = duplicateKeys.ToList();
 
-                for (int i = 0; i < resultsYU.Count; i++)
-                {
-                    string duplicatePlayList = resultsYU[i];
-                    playlistList.RemoveAll(p => p.StartsWith(duplicatePlayList));
-                }
+                //for (int i = 0; i < resultsYU.Count; i++)
+                //{
+                //    string duplicatePlayList = resultsYU[i];
+                //    playlistList.RemoveAll(p => p.StartsWith(duplicatePlayList));
+                //}
+
+                //for (int i = 1; i < playlistList.Count; i++)
+                //{
+                //    TWDP.Playlist.BL.Playlist playlist = new Playlist.BL.Playlist();
+                //    playlist.SuggestedPlaylistTitle = playlistList[0];
+                //    playlists1.Add(playlist);
+                //}
+
+
+                //var duplicateKeys2 = playlistList2.GroupBy(x => x)
+                //.Where(group => group.Count() > 1)
+                // .Select(group => group.Key);
+
+                //var resultsYUM = duplicateKeys2.ToList();
+
+                //for (int i = 0; i < resultsYUM.Count; i++)
+                //{
+                //    string duplicatePlayList = resultsYUM[i];
+                //    playlistList2.RemoveAll(p => p.StartsWith(duplicatePlayList));
+                //}
+
+
 
                 lstSuggestedPlayList.ItemsSource = playlistList;
             }
@@ -136,13 +171,37 @@ namespace TWDP.PlayList.UI
         }
 
 
-        private void btnEmail_Click(object sender, RoutedEventArgs e)
+
+
+
+
+        async void btnEmail_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 SendEmail();
 
 
+
+                for (int i = 0; i < playlistList2.Count - 1; i++)
+                {
+                   
+                    TWDP.Playlist.BL.Playlist playlist = new TWDP.Playlist.BL.Playlist();
+                    playlist.ImagePath = playlistListImagePaths[i];
+                    playlist.SuggestedPlaylistTitle = playlistList2[i];
+
+
+                    HttpClient client = new HttpClient();
+                    Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+                    client.BaseAddress = baseAddress;
+
+
+                    string serializedPlaylist = JsonConvert.SerializeObject(playlist);
+                    var content = new StringContent(serializedPlaylist);
+                    content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    HttpResponseMessage  response =  client.PostAsync("PlayList", content).Result;
+
+                }
             }
             catch (Exception ex)
             {
@@ -150,13 +209,16 @@ namespace TWDP.PlayList.UI
                 MessageBox.Show("An Error Occured");
 
             }
-
-
-            //GMAIL ACCOUNT INFO
-            //Username: playlsitmakerbeta@gmail.com
-            //Password: PlaylistMaker21
-
         }
+
+
+
+
+        //GMAIL ACCOUNT INFO
+        //Username: playlsitmakerbeta@gmail.com
+        //Password: PlaylistMaker21
+
+
 
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -178,13 +240,13 @@ namespace TWDP.PlayList.UI
             }
             else
             {
-               //ADD ALL OF THE PREVIEW CODE INTO THIS SECTION
+                //ADD ALL OF THE PREVIEW CODE INTO THIS SECTION
             }
         }
 
         private void lstSuggestedPlayList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(lstSuggestedPlayList.SelectedItems.Count <= 0)
+            if (lstSuggestedPlayList.SelectedItems.Count <= 0)
             {
                 //default
                 imgAlbumArtwork.Source = new BitmapImage(new Uri("/Images/logo.png", UriKind.RelativeOrAbsolute));
@@ -196,4 +258,6 @@ namespace TWDP.PlayList.UI
             }
         }
     }
+
 }
+

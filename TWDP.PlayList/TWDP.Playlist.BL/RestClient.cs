@@ -87,16 +87,19 @@ namespace TWDP.PlayList.UI
 
                             User oerr = JsonConvert.DeserializeObject<User>(strResponseValue);
 
-                         
+                            
                                 if (oerr.Password == this.userPassword)
                                 {
                                     System.Diagnostics.Debug.WriteLine("Good Password");
                                 }
-                                else
-                                {
-                                    System.Diagnostics.Debug.WriteLine("Bad Password");
-                                }
-                                
+                            else
+                            {
+                                throw new BadPassWordException("Invalid User Input");
+                            }
+                      
+                         
+                              
+                            
                                 
                             
 
@@ -110,23 +113,31 @@ namespace TWDP.PlayList.UI
                 }
                 catch (Exception ex)
                 {
-                    strResponseValue = "{\"errorMessages\":[\"" + ex.Message.ToString() + "\"],\"errors\":{}}";
+                    throw ex;
                 }
-                finally
-                {
-                    if (response != null)
-                    {
-                        ((IDisposable)response).Dispose();
-                    }
-                }
+                //finally
+                //{
+                //    if (response != null)
+                //    {
+                //        ((IDisposable)response).Dispose();
+                //    }
+                //}
 
                 return strResponseValue;
             }
 
         }
 
-
-
-
+    public class BadPassWordException : Exception
+    {
+        public BadPassWordException(string message)
+           : base(message)
+        {
+        }
     }
+
+
+
+
+}
 

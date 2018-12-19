@@ -46,8 +46,7 @@ namespace TWDP.PlayList.UI
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            RestClient restClient = new RestClient();
-            restClient.userName = "woldtman";
+            
 
             if (log.IsWarnEnabled)
             {
@@ -55,10 +54,26 @@ namespace TWDP.PlayList.UI
                 lblPleaseLogin.Content = log;
             }
 
-            //actual password maple
-            restClient.userPassword = "dickface";
-            restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
-            restClient.makeRequest();
+            try
+            {
+                RestClient restClient = new RestClient();
+                restClient.userName = txtEmail.Text;
+                //actual password maple
+                restClient.userPassword = txtPassword.Text;
+                restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
+                restClient.makeRequest();
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Login Credentials Not Right");
+            }
+      
         }
     }
 }
