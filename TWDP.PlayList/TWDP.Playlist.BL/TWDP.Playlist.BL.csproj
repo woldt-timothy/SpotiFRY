@@ -101,6 +101,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TWDP.PlayList.PL\TWDP.PlayList.PL.csproj">
       <Project>{c12c15ce-74a7-4f41-856a-e2af188fc220}</Project>
       <Name>TWDP.PlayList.PL</Name>
