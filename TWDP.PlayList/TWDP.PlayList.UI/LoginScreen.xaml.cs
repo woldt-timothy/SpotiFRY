@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TWDP.Playlist.BL;
+using log4net;
 
 namespace TWDP.PlayList.UI
 {
@@ -20,7 +21,8 @@ namespace TWDP.PlayList.UI
     /// </summary>
     public partial class LoginScreen : Window
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("Utility.Logger");
+
+        log4net.ILog log = log4net.LogManager.GetLogger("Utility2.Logger");
 
         public LoginScreen()
         {
@@ -48,11 +50,7 @@ namespace TWDP.PlayList.UI
         {
             
 
-            if (log.IsWarnEnabled)
-            {
-                log.Warn(txtEmail.Text);
-                lblPleaseLogin.Content = log;
-            }
+          
 
             try
             {
@@ -67,7 +65,7 @@ namespace TWDP.PlayList.UI
                 restClient.userPassword = txtPassword.Password.ToString();
                 restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=" + restClient.userName;
                 restClient.makeRequest();
-
+                log.Warn(txtEmail.Text);
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();
@@ -75,6 +73,11 @@ namespace TWDP.PlayList.UI
             }
             catch (Exception ex)
             {
+
+                if (log.IsWarnEnabled)
+                    log.Warn(txtPassword.Password.ToString());
+
+                MessageBox.Show("Logged");
 
                 lblPleaseLogin.Content = "Wrong Username or Password, Please try again.";
 
