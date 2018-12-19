@@ -56,11 +56,16 @@ namespace TWDP.PlayList.UI
 
             try
             {
+                /// <summary>
+                /// Basic Authenticatin, tried to do windows authentication also but could not get it to work on my computer
+                /// </summary>
+
+
                 RestClient restClient = new RestClient();
                 restClient.userName = txtEmail.Text;
                 //actual password maple
                 restClient.userPassword = txtPassword.Password.ToString();
-                restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=woldtman";
+                restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=" + restClient.userName;
                 restClient.makeRequest();
 
                 MainWindow mainWindow = new MainWindow();

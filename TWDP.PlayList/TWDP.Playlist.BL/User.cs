@@ -194,7 +194,33 @@ namespace TWDP.Playlist.BL
             return new SHA256Managed().ComputeHash(saltedValue);
         }
 
+        public void InsertPlayList(Guid guid, string title)
+        {
+            try
+            {
+                using (playlistEntities dc = new playlistEntities())
+                {
+                    var playlist = dc.tblSuggestedPlaylists.Where(p => p.SuggestedPlaylistTitle == title).FirstOrDefault();
+                    if (playlist != null)
+                    {
+                        tblUSP uSP = new tblUSP();
+                        uSP.USPId = Guid.NewGuid();
+                        uSP.UserId = guid;
+                        uSP.SuggestedPlaylistId = playlist.SuggestedPlaylistId;
+                        dc.tblUSPs.Add(uSP);
+                        dc.SaveChanges();
+                    }
 
+
+                }
+            }
+            catch (Exception e)
+            {
+
+
+                throw e;
+            }
+        }
 
 
         public void LoadById(string loginid)

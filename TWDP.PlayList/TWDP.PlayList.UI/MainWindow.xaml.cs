@@ -112,6 +112,15 @@ namespace TWDP.PlayList.UI
                 }
 
 
+
+
+                /// <summary>
+                /// Summary for the commented out code below - this code will remove duplicate playlist names, since we decided
+                /// to link the playlist image artwork with the selected index changed event, we didn't use it, it works fine without 
+                /// album image artwork though, pretty interesting
+                /// </summary>
+
+
                 //var duplicateKeys = playlistList.GroupBy(x => x)
                 //.Where(group => group.Count() > 1)
                 //  .Select(group => group.Key);
