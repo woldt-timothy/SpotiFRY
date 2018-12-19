@@ -254,7 +254,7 @@ namespace TWDP.PlayList.UI
             else
             {
                 //selected item background
-                imgAlbumArtwork.Source = new BitmapImage(new Uri("https://consequenceofsound.files.wordpress.com/2018/07/travis-scott-astroworld-cover-art.png?w=807", UriKind.RelativeOrAbsolute));
+                imgAlbumArtwork.Source = new BitmapImage(new Uri(playlistListImagePaths[lstSuggestedPlayList.SelectedIndex], UriKind.RelativeOrAbsolute));
             }
         }
     }
