@@ -10,29 +10,16 @@ namespace TWDP.Playlist.BL
 {
     public class Playlist
     {
-
-
-
         public Guid SuggestedPlaylistId { get; set; }
         public string SuggestedPlaylistTitle { get; set; }
         public string ImagePath { get; set; }
-
-
-
-
         private Guid SuggestedPlayListId;
         private string SuggestedPlayListTitle;
         private string SuggestedPlayListImagePath;
-
         public List<Playlist> playlistList = new List<Playlist>();
         
-
-
         public Playlist()
         {
-
-            
-
 
         }
 
@@ -45,7 +32,6 @@ namespace TWDP.Playlist.BL
 
         public void Insert()
         {
-
             try
             {
                 using (playlistEntities dc = new playlistEntities())
@@ -54,14 +40,10 @@ namespace TWDP.Playlist.BL
                     suggestedPlayList.SuggestedPlaylistId = Guid.NewGuid();
                     suggestedPlayList.SuggestedPlaylistTitle= SuggestedPlaylistTitle;
                     suggestedPlayList.ImagePath= ImagePath;
-                    
 
                     dc.tblSuggestedPlaylists.Add(suggestedPlayList);
                     dc.SaveChanges();
                 }
-
-
-
             }
             catch (Exception e)
             {
@@ -70,15 +52,12 @@ namespace TWDP.Playlist.BL
             }
         }
 
-
         public void Delete()
         {
-
             try
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-
                     tblSuggestedPlaylist playlist = dc.tblSuggestedPlaylists.Where(sp => sp.SuggestedPlaylistId == SuggestedPlaylistId).FirstOrDefault();
 
                     if (playlist!= null)
@@ -87,18 +66,14 @@ namespace TWDP.Playlist.BL
 
                         dc.SaveChanges();
                     }
-
                 }
             }
             catch (Exception e)
             {
-
                 throw e;
             }
 
-
         }
-
 
         public void LoadById(Guid guid)
         {
@@ -106,14 +81,12 @@ namespace TWDP.Playlist.BL
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-
                     tblSuggestedPlaylist playlist = dc.tblSuggestedPlaylists.FirstOrDefault(sp => sp.SuggestedPlaylistId == guid);
                     if (playlist != null)
                     {
                         SuggestedPlaylistId = playlist.SuggestedPlaylistId;
                         SuggestedPlaylistTitle = playlist.SuggestedPlaylistTitle;
-                        ImagePath = playlist.ImagePath;
-                        
+                        ImagePath = playlist.ImagePath;       
                     }
                     else
                     {
@@ -129,7 +102,6 @@ namespace TWDP.Playlist.BL
 
         public void LoadPlaylist(Guid guid)
         {
-
             try
             {
                 playlistEntities dc = new playlistEntities();
@@ -151,21 +123,11 @@ namespace TWDP.Playlist.BL
                     playlistList.Add(playlist);
 
                 }
-
-
-
-
             }
             catch (Exception e)
             {
-
                 throw e;
             }
-
-
         }
-
     }
-
-
 }
