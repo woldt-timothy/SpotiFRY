@@ -21,7 +21,7 @@ namespace TWDP.PlayList.SL.Test
 
 
             HttpClient client = new HttpClient();
-            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            Uri baseAddress = new Uri("azurewebsites.net/api/");
             client.BaseAddress = baseAddress;
 
 
@@ -37,11 +37,6 @@ namespace TWDP.PlayList.SL.Test
             int actual = playlists.Count();
 
             Assert.AreEqual(expected, actual);
-
-
-
-
-
         }
     }
 }

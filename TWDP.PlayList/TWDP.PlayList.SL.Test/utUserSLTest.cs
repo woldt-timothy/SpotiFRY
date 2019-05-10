@@ -24,10 +24,8 @@ namespace TWDP.PlayList.SL.Test
             user.Password = "maple";
             user.SpotifyId = "Youranidiot";
             
-
-
             HttpClient client = new HttpClient();
-            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            Uri baseAddress = new Uri("azurewebsites.net/api/");
             client.BaseAddress = baseAddress;
 
 
@@ -39,9 +37,6 @@ namespace TWDP.PlayList.SL.Test
             playlistEntities dc = new playlistEntities();
             var users = dc.tblUsers;
 
-
-         
-
             int expected = 10;
             int actual = users.Count();
 
@@ -49,34 +44,24 @@ namespace TWDP.PlayList.SL.Test
         }
         private static string ProcessParametersForLoadById(String ac)
         {
-
             string prePender = "?loginid=" + ac;
-
 
             return prePender;
         }
-
 
         private static string ProcessParamatersForDelete(String ac)
         {
-
             string prePender = "?loginid=" + ac;
-
 
             return prePender;
         }
-
-
-
 
         [TestMethod]
         public void LoadByIdTest()
         {
-
             HttpClient client = new HttpClient();
 
-
-            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            Uri baseAddress = new Uri("azurewebsites.net/api/");
 
             client.BaseAddress = baseAddress;
 
@@ -84,72 +69,55 @@ namespace TWDP.PlayList.SL.Test
             dynamic item;
             HttpResponseMessage response;
 
-
-
             User user = new User();
             
-            string acTeststr = ProcessParametersForLoadById("woldt");
+            string acTeststr = ProcessParametersForLoadById("SOMEONE");
             response = client.GetAsync("User" + acTeststr).Result;
             result = response.Content.ReadAsStringAsync().Result;
             user = JsonConvert.DeserializeObject<User>(result);
 
-            string expected = "Timothy";
+            string expected = "SOMEONESNAME";
 
             Assert.AreEqual(expected, user.FirstName);
 
         }
 
-
         [TestMethod]
         public void DeleteTest()
         {
-
             HttpClient client = new HttpClient();
 
-
-            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            Uri baseAddress = new Uri("azurewebsites.net/api/");
 
             client.BaseAddress = baseAddress;
 
-
-
-            string acTeststr = ProcessParamatersForDelete("PalomiSandwich");
+            string acTeststr = ProcessParamatersForDelete("Pal");
             HttpResponseMessage response = client.DeleteAsync("User"+ acTeststr).Result;
-
 
             playlistEntities dc = new playlistEntities();
             var users = dc.tblUsers;
-
-
-
 
             int expected = 9;
             int actual = users.Count();
 
             Assert.AreEqual(expected, actual);
-
         }
-
 
         [TestMethod]
         public void UpdateTest()
         {
             TWDP.Playlist.BL.User user = new TWDP.Playlist.BL.User();
 
-            user.LoginId= "jonBoy";
-            user.LastName = "Wally";
-            user.Password = "maple";
-            user.SpotifyId = "maple";
+            user.LoginId= "jon";
+            user.LastName = "Wal";
+            user.Password = "GOOSE";
+            user.SpotifyId = "SpotifyId";
             user.Email = "dicky@hotmail.com";
             user.FirstName = "Jimmy";
 
-
-            
-
             HttpClient client = new HttpClient();
-            Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+            Uri baseAddress = new Uri("azurewebsites.net/api/");
             client.BaseAddress = baseAddress;
-
 
             string serializedUser = JsonConvert.SerializeObject(user);
             var content = new StringContent(serializedUser);
@@ -158,19 +126,12 @@ namespace TWDP.PlayList.SL.Test
 
             playlistEntities dc = new playlistEntities();
 
-
             User user2 = new User();
-            user2.LoadById("jonBoy");
+            user2.LoadById("jon");
 
             string expected = "dicky@hotmail.com";
 
             Assert.AreEqual(expected, user2.Email);
-
-
-            
         }
-
-
-
     }
 }

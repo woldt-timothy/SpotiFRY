@@ -12,8 +12,6 @@ namespace TWDP.PlayList.PL.Test
         [TestMethod]
         public void SuggestedPlayListInsert()
         {
-
-
             using (playlistEntities dc = new playlistEntities())
             {
                 var beforerows = from t in dc.tblSuggestedPlaylists
@@ -29,9 +27,6 @@ namespace TWDP.PlayList.PL.Test
                 newrow.SuggestedPlaylistTitle = "The Ultimate Pop PlayList";
                 newrow.ImagePath = "https://images-na.ssl-images-amazon.com/images/I/81klCVJB0AL._SY355_.jpg";
 
-
-
-
                 dc.tblSuggestedPlaylists.Add(newrow);
 
                 dc.SaveChanges();
@@ -42,9 +37,6 @@ namespace TWDP.PlayList.PL.Test
 
                 Assert.AreEqual(beforecount, aftercount - 1);
             }
-
-
-
         }
 
         [TestMethod]
@@ -56,23 +48,16 @@ namespace TWDP.PlayList.PL.Test
                            select t;
                 Assert.AreEqual(rows.Count(), 5);
             }
-
-
         }
-
-
 
         [TestMethod]
         public void SuggestedPlayListDeleteTest()
         {
             using (playlistEntities dc = new playlistEntities())
             {
-
                 var beforerows = from t in dc.tblSuggestedPlaylists
                                  select t;
-
                 int beforecount = beforerows.Count();
-
 
                 tblSuggestedPlaylist row = (from t in dc.tblSuggestedPlaylists
                                             where t.SuggestedPlaylistTitle == "The Ultimate Pop PlayList"
@@ -81,21 +66,13 @@ namespace TWDP.PlayList.PL.Test
                 dc.tblSuggestedPlaylists.Remove(row);
                 dc.SaveChanges();
 
-
-
                 var afterrows = from t in dc.tblSuggestedPlaylists
                                 select t;
                 int aftercount = afterrows.Count();
 
                 Assert.AreEqual(beforecount, aftercount +1);
-                
-
             }
         }
-
-
-
-
     }
 }
 

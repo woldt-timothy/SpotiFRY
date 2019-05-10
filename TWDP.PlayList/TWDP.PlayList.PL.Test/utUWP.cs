@@ -14,29 +14,22 @@ namespace TWDP.PlayList.PL.Test
         {
             using (playlistEntities dc = new playlistEntities())
             {
-
                 var beforerows = from t in dc.tblUSPs
                                  select t;
 
                 int beforecount = beforerows.Count();
 
-
                 tblUSP newrow;
 
                 newrow = new tblUSP();
-
 
                 newrow.USPId = Guid.NewGuid();
                 newrow.UserId = Guid.NewGuid();
                 newrow.SuggestedPlaylistId = Guid.NewGuid();
 
-
-
                 dc.tblUSPs.Add(newrow);
 
-
                 dc.SaveChanges();
-
 
                 var afterrows = from t in dc.tblUSPs
                                 select t;
@@ -44,9 +37,6 @@ namespace TWDP.PlayList.PL.Test
 
                 Assert.AreEqual(beforecount, aftercount - 1);
             }
-
-
-
         }
 
         [TestMethod]
@@ -58,20 +48,12 @@ namespace TWDP.PlayList.PL.Test
                            select t;
                 Assert.AreEqual(rows.Count(), 5);
             }
-
-
         }
-
 
         [TestMethod]
         public void USPDeletetest()
         {
-
-            Guid guid = Guid.Parse("cb4c239f-0307-4d57-ad1e-0285ae17ce85");
-
-
-
-
+            Guid guid = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
 
             using (playlistEntities dc = new playlistEntities())
             {
@@ -97,8 +79,5 @@ namespace TWDP.PlayList.PL.Test
                 Assert.AreEqual(beforecount, aftercount + 1);
             }
         }
-
-
-
     }
 }

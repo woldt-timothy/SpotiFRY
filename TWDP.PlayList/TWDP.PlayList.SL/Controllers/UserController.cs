@@ -10,7 +10,7 @@ namespace TWDP.PlayList.SL.Controllers
 {
     public class UserController : ApiController
     {
-        [Authorize(Users = "DESKTOP-H8546LJ//CREATOR OWNER")]
+        [Authorize(Users = "DESKTOP-AAAAAA//CREATOR OWNER")]
         // GET: api/User
         public IEnumerable<string> Get()
         {
@@ -45,14 +45,6 @@ namespace TWDP.PlayList.SL.Controllers
             user.LoadById(loginid);
             user.Delete();
         }
-
-        //// Login: api/User
-        //public bool Login()
-        //{
-        //    User user = new User();
-        //    return  user.Login();
-        //}
-
 
     }
 }
