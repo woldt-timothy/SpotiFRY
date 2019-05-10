@@ -41,7 +41,6 @@ namespace TWDP.PlayList.UI
             public string userName { get; set; }
             public string userPassword { get; set; }
 
-
             public RestClient(string v)
             {
                 endPoint = string.Empty;
@@ -50,15 +49,15 @@ namespace TWDP.PlayList.UI
 
         public RestClient()
         {
+
         }
 
         public string makeRequest()
-            {
+        {
                 string strResponseValue = string.Empty;
 
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
-
-            request.Method = "GET";
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);                
+                request.Method = "GET";
 
                 String authHeaer = System.Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(userName + ":" + userPassword));
                 request.Headers.Add("Authorization", "Basic" + " " + authHeaer);
@@ -69,9 +68,6 @@ namespace TWDP.PlayList.UI
                 {
                     response = (HttpWebResponse)request.GetResponse();
 
-
-                    //Proecess the resppnse stream... (could be JSON, XML or HTML etc..._
-
                     using (Stream responseStream = response.GetResponseStream())
                     {
                         if (responseStream != null)
@@ -79,34 +75,18 @@ namespace TWDP.PlayList.UI
                             using (var s = new StreamReader(responseStream))
                             {
 
-                            
-
                             strResponseValue = s.ReadToEnd();
-
-                          
 
                             User oerr = JsonConvert.DeserializeObject<User>(strResponseValue);
 
-                            
                                 if (oerr.Password == this.userPassword)
                                 {
-                                    System.Diagnostics.Debug.WriteLine("Good Password");
+                                        System.Diagnostics.Debug.WriteLine("Good Password");
                                 }
-                            else
-                            {
-                                throw new BadPassWordException("Invalid User Input");
-                            }
-                      
-                         
-                              
-                            
-                                
-                            
-
-                          
-
-                           
-                            
+                                else
+                                {
+                                    throw new BadPassWordException("Invalid User Input");
+                                }
                             }
                         }
                     }
@@ -115,17 +95,8 @@ namespace TWDP.PlayList.UI
                 {
                     throw ex;
                 }
-                //finally
-                //{
-                //    if (response != null)
-                //    {
-                //        ((IDisposable)response).Dispose();
-                //    }
-                //}
-
                 return strResponseValue;
             }
-
         }
 
     public class BadPassWordException : Exception
@@ -135,9 +106,5 @@ namespace TWDP.PlayList.UI
         {
         }
     }
-
-
-
-
 }
 
