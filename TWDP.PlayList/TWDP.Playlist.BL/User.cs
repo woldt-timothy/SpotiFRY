@@ -18,12 +18,9 @@ namespace TWDP.Playlist.BL
         public string LoginId { get; set; }
         public string SpotifyId { get; set; }
 
-
-
         public User()
         {
         }
-
 
         public void Insert()
         {
@@ -40,17 +37,12 @@ namespace TWDP.Playlist.BL
                     user.Password = GetHash();
                     user.SpotifyId = GetHashSpotifyId();
 
-                    
-
                     dc.tblUsers.Add(user);
                     dc.SaveChanges();
-
                 }
             }
             catch (Exception e)
             {
-
-
                 throw e;
             }
         }
@@ -63,7 +55,6 @@ namespace TWDP.Playlist.BL
                 return Convert.ToBase64String(hash.ComputeHash(hashbytes));
             }
         }
-
 
         private string GetHash()
         {
@@ -121,7 +112,6 @@ namespace TWDP.Playlist.BL
             }
         }
 
-
         public void Delete()
         {
             try
@@ -135,22 +125,16 @@ namespace TWDP.Playlist.BL
                         dc.tblUsers.Remove(user);
                         dc.SaveChanges();
                     }
-
                 }
 
             }
             catch (Exception e)
             {
-
                 throw e;
             }
 
-
-
         }
 
-
-        
         public void Update()
         {
             try
@@ -173,7 +157,6 @@ namespace TWDP.Playlist.BL
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -185,8 +168,6 @@ namespace TWDP.Playlist.BL
 
         public static byte[] Hash(byte[] value, byte[] salt)
         {
-            //byte[] saltedValue = value.Concat(salt).ToArray();
-            // Alternatively use CopyTo.
             var saltedValue = new byte[value.Length + salt.Length];
             value.CopyTo(saltedValue, 0);
             salt.CopyTo(saltedValue, value.Length);
@@ -210,18 +191,13 @@ namespace TWDP.Playlist.BL
                         dc.tblUSPs.Add(uSP);
                         dc.SaveChanges();
                     }
-
-
                 }
             }
             catch (Exception e)
             {
-
-
                 throw e;
             }
         }
-
 
         public void LoadById(string loginid)
         {
@@ -229,7 +205,6 @@ namespace TWDP.Playlist.BL
             {
                 using (playlistEntities dc = new playlistEntities())
                 {
-
                     var user = dc.tblUsers.FirstOrDefault(u => u.LoginId == loginid);
                     if (user != null)
                     {
@@ -240,20 +215,13 @@ namespace TWDP.Playlist.BL
                         Password = user.Password;
                         LoginId = user.LoginId;
                     }
-
-                    
                 }
                     
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
-
-
-
     }
-
 }
