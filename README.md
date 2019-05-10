@@ -8,3 +8,8 @@ Technologies: WPF | N-Tier/Repository Model | cURL | Entity Framework | Newtonso
 ![login](https://user-images.githubusercontent.com/31869613/57558020-cc598c80-7341-11e9-97b9-a955d2267a98.png)
 
 
+
+
+![ui](https://user-images.githubusercontent.com/31869613/57558084-12165500-7342-11e9-8cc8-90271538e04c.png)
+
+
