@@ -48,13 +48,12 @@ namespace TWDP.PlayList.UI
         public async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
 
-            const string username = "woldt.timothy";
-            const string playlistId = "64CntkO6kptPuFglj6h5Os";
+            const string username = "SpotifyUserName";
+            const string playlistId = "SpotifyPlayListId";
 
             var http = new HttpClient();
             var accounts = new AccountsService(http, ConfigurationHelper.GetLocalConfig());
             var api = new PlaylistsApi(http, accounts);
-
 
             List<string> artistList = new List<string>();
 
@@ -73,22 +72,18 @@ namespace TWDP.PlayList.UI
 
             lstRecentPlayList.ItemsSource = artistList;
 
-
             Random random = new Random();
             int randomNumber = random.Next(0, response.Items.Length);
-
 
             string query = artistList[randomNumber];
 
             if (query != null)
             {
-
                 var httpNewPlayList = new HttpClient();
                 api = new PlaylistsApi(http, accounts);
 
                 List<string> playlistList = new List<string>();
                 List<string> playlistListImagePath = new List<string>();
-
 
                 var response1 = await api.SearchPlaylists(query);
 
@@ -111,13 +106,10 @@ namespace TWDP.PlayList.UI
                     }
                 }
 
-
-
-
                 /// <summary>
                 /// Summary for the commented out code below - this code will remove duplicate playlist names, since we decided
                 /// to link the playlist image artwork with the selected index changed event, we didn't use it, it works fine without 
-                /// album image artwork though, pretty interesting
+                /// album image artwork though, I thought it was interesting
                 /// </summary>
 
 
@@ -153,11 +145,8 @@ namespace TWDP.PlayList.UI
                 //    playlistList2.RemoveAll(p => p.StartsWith(duplicatePlayList));
                 //}
 
-
-
                 lstSuggestedPlayList.ItemsSource = playlistList;
             }
-
         }
 
         private void SendEmail()
@@ -170,43 +159,31 @@ namespace TWDP.PlayList.UI
             {
                 string cols = string.Join("    -   ", lstSuggestedPlayList.Items.Cast<String>());
                 string mailBodyhtml = cols;
-                var msg = new MailMessage("playlistmakerbeta@gmail.com", "dalton5699@hotmail.com", "Your new playlists are finally here!", mailBodyhtml); //change my email to users email that they use to login
-                                                                                                                                                          //msg.To.Add("to2@gmail.com");
+                var msg = new MailMessage("recipientemail@gmail.com", "senderemail.com", "Your new playlists are finally here!", mailBodyhtml); 
                 msg.IsBodyHtml = true;
                 var smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.UseDefaultCredentials = true;
-                smtpClient.Credentials = new NetworkCredential("playlistmakerbeta@gmail.com", "PlaylistMaker21");
+                smtpClient.Credentials = new NetworkCredential("recipientemail@gmail.com", "Password");
                 smtpClient.EnableSsl = true;
                 smtpClient.Send(msg);
                 MessageBox.Show("Email Sent Successfully");
             }
         }
 
-
-
-
-
-
         async void btnEmail_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 SendEmail();
-
-
-
                 for (int i = 0; i < playlistList2.Count - 1; i++)
-                {
-                   
+                {  
                     TWDP.Playlist.BL.Playlist playlist = new TWDP.Playlist.BL.Playlist();
                     playlist.ImagePath = playlistListImagePaths[i];
                     playlist.SuggestedPlaylistTitle = playlistList2[i];
 
-
                     HttpClient client = new HttpClient();
-                    Uri baseAddress = new Uri("http://playlistapitwdp.azurewebsites.net/api/");
+                    Uri baseAddress = new Uri("azurewebsites.net/api/");
                     client.BaseAddress = baseAddress;
-
 
                     string serializedPlaylist = JsonConvert.SerializeObject(playlist);
                     var content = new StringContent(serializedPlaylist);
@@ -219,19 +196,8 @@ namespace TWDP.PlayList.UI
             {
                 Console.WriteLine(ex.ToString());
                 MessageBox.Show("An Error Occured");
-
             }
         }
-
-
-
-
-        //GMAIL ACCOUNT INFO
-        //Username: playlsitmakerbeta@gmail.com
-        //Password: PlaylistMaker21
-
-
-
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {

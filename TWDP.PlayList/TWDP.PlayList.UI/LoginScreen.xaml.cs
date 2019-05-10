@@ -37,52 +37,33 @@ namespace TWDP.PlayList.UI
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-
-
-        }
-
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
-
-          
-
             try
             {
-                /// <summary>
-                /// Basic Authenticatin, tried to do windows authentication also but could not get it to work on my computer
-                /// </summary>
-
-
+                /// Basic Authentication, tried to do windows authentication also but did not get it to work on my computer
                 RestClient restClient = new RestClient();
+
                 restClient.userName = txtEmail.Text;
-                //actual password maple
                 restClient.userPassword = txtPassword.Password.ToString();
-                restClient.endPoint = "http://playlistapitwdp.azurewebsites.net/api/User?loginid=" + restClient.userName;
+                restClient.endPoint = "azurewebsites.net/api/User?loginid=" + restClient.userName;
                 restClient.makeRequest();
+
                 log.Warn(txtEmail.Text);
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 this.Close();
-
             }
             catch (Exception ex)
             {
-
                 if (log.IsWarnEnabled)
                     log.Warn(txtPassword.Password.ToString());
 
-              
-
                 lblPleaseLogin.Content = "Wrong Username or Password, Please try again.";
-
             }
-      
         }
     }
 }
